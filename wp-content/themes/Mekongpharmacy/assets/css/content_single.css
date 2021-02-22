@@ -1,0 +1,80 @@
+
+
+#content_single_gtbh030620 #single-header {
+	margin: 30px 0;
+}
+#content_single_gtbh030620 #single-header h1 {
+	font-size: 1.6em
+}
+#content_single_gtbh030620 .this-author a {
+	color: inherit;
+}
+#content_single_gtbh030620 .this-author {
+	opacity: .8; font-style: italic;
+}
+#content_single_gtbh030620 .this-author i {
+	margin-left: 15px; margin-right: 5px
+}
+#content_single_gtbh030620 .article-content {
+	text-align: justify;
+}
+#content_single_gtbh030620 .article-content h2{
+	font-size: 1.4em;
+}
+#content_single_gtbh030620 .article-content h3{
+	font-size: 1.2em;
+}
+#content_single_gtbh030620 .article-content h4,
+#content_single_gtbh030620 .article-content h5,
+#content_single_gtbh030620 .article-content h6{
+	font-size: 1.1em;
+}
+#content_single_gtbh030620  #single-footer {
+	margin: 15px 0; padding-top:15px; border-top: solid 1px #ddd
+}
+#content_single_gtbh030620 .namlbn-tags a, #content_single_gtbh030620 .post-cat a {
+	display: inline-block; padding:3px 5px; margin-right: 5px; border-radius: 3px;
+	background-color: #eaeaeadd; color: inherit; text-decoration: none;font-weight: normal;
+}
+#content_single_gtbh030620 .post-cat,#content_single_gtbh030620 .namlbn-tags{
+	font-weight: bold;
+}
+#content_single_gtbh030620 .post-pagination a {
+	display: table; text-decoration: none; color: inherit; font-style: italic; 
+}
+@media(max-width: 640px){
+	#content_single_gtbh030620>.container{
+		transform: none;
+	}
+	#banner_post.padding_ratio:before{
+		padding-bottom: 60%
+	}
+	#banner_post .content{
+		transform: translate(-50%,-50%);
+		width: 100%
+	}
+	#content_single_gtbh030620 .col_wrapper{
+		padding: 5PX;
+		box-shadow: unset;
+	}
+	#content_single_gtbh030620 .img_post:before{
+		padding-bottom: 60%
+	} 
+	#content_single_gtbh030620 #single-header h1{
+		font-size: 1.4em
+	}
+}
+@media (min-width: 641px) and (max-width: 1024px){
+	#banner_post.padding_ratio:before{
+		padding-bottom: 60%
+	}
+	#content_single_gtbh030620 .row{
+		margin: 0 -7.5px;
+	}
+	#content_single_gtbh030620 .col-9,#content_single_gtbh030620 .col-3{
+		padding: 0 7.5px;
+	}
+	#content_single_gtbh030620 .col_wrapper{
+		padding: 12px;
+	}
+}

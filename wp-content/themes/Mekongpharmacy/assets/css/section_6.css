@@ -1,0 +1,14 @@
+#section_6 .products li{
+	flex: 20%;
+	max-width: 20%
+}
+@media (max-width: 640px){
+	
+	#section_6 .products li{
+		flex: 50%;
+		max-width: 50%
+	}
+	#section_6 .section_title{
+		text-align: center;
+	}
+}

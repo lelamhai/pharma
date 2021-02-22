@@ -1,0 +1,26 @@
+#section_9 {
+	background: linear-gradient(to right,#3a9db8,#1e64a9);
+	padding: 10px 0;
+}
+#section_9 h2 i{
+	margin-right: 15px;
+}
+#section_9 a{
+  padding: 10px 25px;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: #51abcb;
+  border-radius: 4px;
+  color: #fff;
+  text-decoration: none;
+}
+@media(max-width: 640px){
+    #section_9 .col-3{
+      
+     text-align: center;
+ }
+ #section_9 h2 {
+    margin-bottom: 15px;
+}
+}
+

@@ -1,0 +1,64 @@
+#section_5 .title{
+	border-bottom: 1px solid #1e69b2
+}
+#section_5 .tab_nav{
+	list-style: none;
+	display: flex;
+	justify-content: flex-start;
+	margin: 0;
+	padding: 0;
+}
+#section_5 .section_title{
+	margin: 0;
+}
+#section_5 .tab_nav li{
+	margin-bottom: 0;
+	margin-right: 15px;
+	padding: 15px 20px;
+	color: #1e69b2;
+	border-top-left-radius: 7.2px;
+	border-top-right-radius: 7.2px;
+	font-weight: bold;
+	cursor: pointer;
+}
+#section_5 .tab_nav li.tab_active{
+	color: #fff;
+	background-color: #1e69b2;
+}
+#section_5 .content_tab{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 30px;
+	z-index: -1;
+	opacity: 0;
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+}
+#section_5 .content_tab.content_active{
+	position: relative;
+	opacity: 1;
+	z-index: 0;
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+
+}
+#section_5 .products li{
+	flex: 20%;
+	max-width: 20%
+}
+@media (max-width: 640px){
+	#section_5 .tab_nav li{
+		padding: 5px 10px;
+		font-size: .8em
+	}
+	#section_5 .products li{
+		flex: 50%;
+		max-width: 50%
+	}
+	#section_5 .section_title{
+		margin-bottom: 15px;
+	} 
+}

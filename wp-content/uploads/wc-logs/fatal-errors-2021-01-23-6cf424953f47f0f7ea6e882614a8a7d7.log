@@ -1,0 +1,8 @@
+2021-01-23T08:19:11+00:00 CRITICAL Cannot use [] for reading in /home/mekongph/public_html/wp-content/themes/Mekongpharmacy/inc/load_agency.php on line 9
+
+2021-01-23T08:38:09+00:00 CRITICAL syntax error, unexpected '}', expecting end of file in /home/mekongph/public_html/wp-content/themes/Mekongpharmacy/inc/load_agency.php on line 58
+
+2021-01-23T14:43:12+00:00 CRITICAL syntax error, unexpected '$the_query' (T_VARIABLE) in /home/mekongph/public_html/wp-content/themes/Mekongpharmacy/template_pill.php on line 53
+
+2021-01-23T15:33:25+00:00 CRITICAL syntax error, unexpected ';', expecting ')' in /home/mekongph/public_html/wp-content/themes/Mekongpharmacy/template_pill.php on line 57
+

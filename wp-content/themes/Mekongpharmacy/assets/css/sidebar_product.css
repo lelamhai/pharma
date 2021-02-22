@@ -1,0 +1,99 @@
+.siderbar_product .chinh_sach_widget{
+	border-top: 3px solid  #30883e
+}
+.siderbar_product ul{
+	list-style:none;
+	padding: 0;
+	margin: 0;
+}
+.siderbar_product .chinh_sach_widget li{
+	padding: 10px 0;
+}
+.siderbar_product .chinh_sach_widget .wrapper{
+	display: flex;
+	margin: 0 -10px;
+	align-items: center;
+}
+.siderbar_product .chinh_sach_widget .img{
+	flex: 25%;
+	max-width: 25%;
+	padding: 0 10px;
+	
+}
+
+.siderbar_product .chinh_sach_widget .img .wrapper_img{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 100%;
+	background: #6b3de5;
+	padding: 10px;
+
+
+}
+.siderbar_product .chinh_sach_widget .img:hover img{
+	transform: scale(1.3);
+	transition: 0.8s
+}
+.siderbar_product .chinh_sach_widget img{
+	object-fit: scale-down;
+	width: 80%;
+	height: 80%;
+}
+.siderbar_product .chinh_sach_widget .img .wrapper_img:before{
+	padding-bottom: 100%
+}
+.siderbar_product .chinh_sach_widget .content{
+	flex: 75%;
+	max-width: 75%;
+	padding: 0 10px;
+}
+.siderbar_product .chinh_sach_widget li:nth-child(1) .wrapper_img{
+	background: #6b3de5;
+}
+.siderbar_product .chinh_sach_widget li:nth-child(2) .wrapper_img{
+	background: #00a9e0;
+}
+.siderbar_product .chinh_sach_widget li:nth-child(3) .wrapper_img{
+	background: #42b47c;
+}
+.siderbar_product .chinh_sach_widget li:nth-child(4) .wrapper_img{
+	background: #ebb04e
+}
+.siderbar_product .support_widget .wrapper{
+	display: flex;
+	align-items: center;
+}
+.siderbar_product .support_widget .img{
+	flex: 25%;
+	max-width: 25%;
+	padding: 0 10px;
+}
+.siderbar_product .support_widget .content{
+	flex: 75%;
+	max-width: 75%;
+	padding: 0 10px;
+}
+.siderbar_product .support_widget li{
+	padding: 5px 0;
+}
+.siderbar_product .support_widget h3{
+	background: #30883e;
+	color: #fff;
+	margin: 0;
+	text-align: left;
+	padding: 8px 10px;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.siderbar_product .support_widget a{
+	margin-right: 10px;
+    display: inline-block;
+    color: red;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.siderbar_product .support_widget{
+	border:1px solid #30883e;
+}

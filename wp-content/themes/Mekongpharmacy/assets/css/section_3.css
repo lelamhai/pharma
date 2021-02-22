@@ -1,0 +1,23 @@
+#section_3 .products li{
+	flex: 20%;
+	max-width: 20%
+}
+#section_3 .product_wrapper{
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	height: auto;
+	border-radius: 12px;
+	background-color: #fff;
+
+}
+@media (max-width: 640px){
+	#section_3 .products li{
+		flex: 50%;
+		max-width: 50%;
+
+	}
+	#section_3 .section_title{
+		text-align: center;
+	}
+}

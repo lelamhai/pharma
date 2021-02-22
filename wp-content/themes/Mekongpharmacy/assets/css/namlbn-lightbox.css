@@ -1,0 +1,45 @@
+.namlbn-lightbox .popup-content img {
+	max-width: 95vw; max-height: 90vh ; min-width: 30vw; width: 100%; object-fit: cover;
+}
+.namlbn-lightbox .popup-content img.img_zoom {
+	max-width: unset; max-height: unset; display: none
+}
+.namlbn-lightbox .popup-content {
+	padding:0;
+}
+.namlbn-zoom {
+	position: fixed; z-index: 1000; display: none;
+	background-repeat: no-repeat; top:50%; left:50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+.namlbn-lightbox .popup-content a {
+	z-index: 1000; color: white; text-shadow: 1px 1px gray;
+	font-size: 20px; top:10px; left:10px; cursor: pointer; position: absolute;
+}
+.namlbn-lightbox .popup-content a:hover {
+	transform: scale(1.1); transition: .5s
+}
+.namlbn-lightbox.popup {
+	display: none; z-index: 999;-webkit-box-align: center;
+	-ms-flex-align: center;align-items: center;
+}
+.namlbn-lightbox.popup, .namlbn-lightbox .popup-bgr{
+	position: fixed;top:0;left: 0;width: 100vw;height: 100vh;
+}
+.namlbn-lightbox .popup-bgr {
+	background-color: black; z-index: 0; opacity: .9
+}
+.namlbn-lightbox .popup-content {
+	position: relative;z-index: 2; background-color: white;
+	/*max-height: 90vh;*/
+	margin:0 auto; max-width: 95%; 
+}
+@media (max-width: 1024px){
+	.namlbn-lightbox .popup-content i {
+		z-index: 1000; color: white; text-shadow: 1px 1px gray;
+		font-size: 20px;  position: fixed
+	}
+	.namlbn-lightbox .popup-content img {
+		object-fit: scale-down;
+	}
+}

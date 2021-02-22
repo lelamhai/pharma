@@ -1,0 +1,13 @@
+#banner_slider_gtbh030620 .padding_ratio:before{
+	padding-bottom: 20%
+}
+@media (max-width: 640px){
+	#banner_slider_gtbh030620 .padding_ratio:before{
+		padding-bottom: 50%
+	}
+}
+@media (min-width: 641px) and(max-width: 1024px){
+	#banner_slider_gtbh030620 .padding_ratio:before{
+		padding-bottom: 40%
+	}
+}

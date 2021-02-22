@@ -1,0 +1,18 @@
+2021-01-25T13:40:26+00:00 CRITICAL Uncaught Error: Call to undefined function have_row() in /home/mekongph/public_html/wp-content/themes/Mekongpharmacy/template_agency.php:50
+Stack trace:
+#0 /home/mekongph/public_html/wp-includes/template-loader.php(106): include()
+#1 /home/mekongph/public_html/wp-blog-header.php(19): require_once('/home/mekongph/...')
+#2 /home/mekongph/public_html/index.php(17): require('/home/mekongph/...')
+#3 {main}
+  thrown in /home/mekongph/public_html/wp-content/themes/Mekongpharmacy/template_agency.php on line 50
+
+2021-01-25T13:40:34+00:00 CRITICAL Uncaught Error: Call to undefined function have_row() in /home/mekongph/public_html/wp-content/themes/Mekongpharmacy/template_agency.php:50
+Stack trace:
+#0 /home/mekongph/public_html/wp-includes/template-loader.php(106): include()
+#1 /home/mekongph/public_html/wp-blog-header.php(19): require_once('/home/mekongph/...')
+#2 /home/mekongph/public_html/index.php(17): require('/home/mekongph/...')
+#3 {main}
+  thrown in /home/mekongph/public_html/wp-content/themes/Mekongpharmacy/template_agency.php on line 50
+
+2021-01-25T15:20:59+00:00 CRITICAL syntax error, unexpected ''>"'' (T_CONSTANT_ENCAPSED_STRING), expecting ',' or ';' in /home/mekongph/public_html/wp-content/themes/Mekongpharmacy/template_pill.php on line 44
+

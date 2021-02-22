@@ -1,0 +1,38 @@
+#search-section .post-title a{
+	text-decoration: none;
+	font-weight: normal;
+	color: #333
+}
+#search-section .col-3{
+	margin-bottom: 15px
+}
+
+#search-section .post-title {
+	font-size: 1.2em
+}
+#search-section .navigation{
+	display: flex;
+	justify-content: center;
+	padding: 15px 0;
+}
+#search-section .navigation span{
+	width: 2em;
+	height: 2em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f1f1f1;
+	margin-right: 5px;
+}
+#search-section .navigation a{
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+	background: #206e47;
+	width: 2em;
+	height: 2em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 5px
+}

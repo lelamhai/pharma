@@ -1,0 +1,15 @@
+div.namlbn-pagination .screen-reader-text {
+	display: none;
+}
+div.namlbn-pagination .nav-links ul {
+	word-spacing: -4px; padding: 0; text-align: center;
+}
+div.namlbn-pagination .nav-links ul li {
+	display: inline-block; margin:0; word-spacing: initial;
+}
+div.namlbn-pagination .nav-links ul li a, div.namlbn-pagination .nav-links ul li span {
+	display: block; text-decoration: none; padding:0 0.7em .1em; border:solid 1px white
+}
+div.namlbn-pagination .nav-links ul li a {
+	color: white; background-color: #4c4c4c;
+}

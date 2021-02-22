@@ -1,0 +1,165 @@
+/*!
+Theme Name:   MeKong Pharmacy
+Theme URI:    
+Author:      
+Author URI:   https://www.facebook.com/lebaonhatnam
+Description:  This theme is use for the Resturant Website
+Version:      1.0
+Text Domain: 
+Tags: custom post type, acf-pro, e-commerce,contact form 7
+*/
+
+/* reset css - open */
+html,body {
+  margin: 0; width: 100%; height: 100%;
+
+}
+body{
+    overflow-x: hidden;
+}
+#site-wrapper{
+  position: relative;
+}
+:root {
+  font-family: sans-serif; font-size: 16px; color:#333; font-weight: normal;
+  line-height: 1.4; 
+}
+p, li,h1,h2,h3,h4,h5,h6 { margin:0; margin-bottom: 5px }
+h1,h2,h3,h4,h5,h6 {
+  font-weight: bold;
+}
+h5 {font-size: 1.1em;}
+h4 {font-size: 1.3em;}
+h3 {font-size: 1.5em; }
+h2 {font-size: 1.7em;}
+h1 {font-size: 2em;}
+img {display: table;max-width: 100%;height: auto;-o-object-fit: cover;object-fit: cover}
+.aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.alignleft {
+  float: left;
+  margin: 0 1em 0.5em 0;
+}
+.alignright {
+  float: right;
+  margin: 0 0 0.5em 1em;
+}
+div.wp-caption{
+  max-width: 100%
+}
+.wp-caption-text {
+  text-align: center;
+  font-style: italic;
+}
+.slick-arrow {
+  position: absolute;top:50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%); z-index: 1;
+  display: -webkit-box;display: -ms-flexbox; display: flex;-webkit-box-align: center;-ms-flex-align: center;
+  align-items: center; background:transparent;border:none; font-size: 30px; color:#ffffff73;
+  cursor: pointer; background: rgba(0,0,0,0.5);padding: 5px;
+}
+.slick-prev {
+  left: 0
+}
+.slick-next {
+  right: 0
+}
+.slide-item {
+  padding: 0 15px
+}
+.slick-slider:focus,.slick-track:focus,.slick-slide:focus,.slick-slide a:focus,
+.slick-arrow:focus {
+  outline: none
+}
+.slick-dots{
+  position: absolute;bottom: 0;display: flex;padding: 0;margin: 10px 0;width: 100%;
+  justify-content: center;list-style: none;
+}
+ul.slick-dots li button { font-size: 0; line-height: 0;display: block; margin: 0 5px;transition: 0.3s;
+  padding: 5px;cursor: pointer;color: transparent;border: 0; outline: none; background: gray;opacity: 0.4;
+  border-radius: 100%;
+}
+ul.slick-dots li.slick-active button,ul.slick-dots li button:hover{
+  opacity: 1;
+}
+/* reset css - close */
+
+/*Font - open*/
+
+
+/*Font - close*/
+
+.flex_center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;
+}
+.relative,.padding_ratio {
+  position: relative;
+  display: block;
+}
+.absolute,.full_relative {
+  position: absolute;
+}
+.padding_ratio:before {
+  content:'';display: block; padding-bottom: 40%;
+}
+.full_relative {
+  width: 100%;height: 100%;top:0;left: 0;
+}
+.align_center {
+  text-align: center;
+}
+.margin_center {
+  display: table; margin:0 auto;
+}
+.main_txt {
+  color: #23743A
+}
+.second_txt {
+  color:#ED3237;
+}
+.white_txt {
+  color: white
+}
+.main_bgr {
+  background-color: #23743A
+}
+.first_bgr {
+  background-color: #ED3237
+}
+.second_bgr {
+  background-color: #38ac59
+}
+.third_bgr {
+  background-color: #FFF212
+}
+.page_section {
+  padding:30px 0;
+}
+.section_title, .page_title {
+  font-size: 2.3rem; font-weight: bold; margin-bottom: .5em;
+}
+.section_title *, .page_title * {
+  font-size: inherit; font-weight: inherit; margin-bottom: inherit;
+}
+
+.namlbn-breadcrumb a , .breadcrumb a{
+  color: #000;
+
+}
+.namlbn-breadcrumb p span:last-child{
+  color: #3db65f;
+  font-weight: bold;
+}
+.breadcrumd{
+background: #f1f1f1;
+padding: 10px 0;
+ margin-bottom: 20px;
+ border-bottom: 1px solid #d8d8d8;
+}
+.namlbn-breadcrumb p{
+  margin: 0;
+}
