@@ -280,4 +280,123 @@ if( function_exists('acf_add_options_page') ) {
 	
 }
 // add theme options - close
+
+// --------- HaiLL ---------
+add_action( 'init', 'process_post' );
+function process_post() {
+     $wp_user_query = new WP_User_Query(array('role' => 'subscriber'));
+	 $users = $wp_user_query->get_results();
+	 if(!empty($users))
+	 {
+		foreach($users as $user)
+		{
+			add_user_meta($user->id,'lelamhai', 'abc', true);
+		}
+	 }
+}
+
+
+add_action('wp_ajax_load_posts_by_ajax', 'load_posts_by_ajax_callback');
+add_action('wp_ajax_nopriv_load_posts_by_ajax', 'load_posts_by_ajax_callback');
+function load_posts_by_ajax_callback() {
+    check_ajax_referer('load_more_posts_policy', 'security');
+	
+	$username = $_POST['username'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+	$phone = $_POST['phone'];
+    $user_id = username_exists( $username );
+    if ( !$user_id && email_exists($email) == false ) {
+        $user_id = wp_create_user( $username, $password, $email );
+        if( !is_wp_error($user_id) ) {
+            $user = get_user_by( 'id', $user_id );
+            $user->set_role( 'subscriber' );
+        }
+    }
+	update_user_meta( $user_id, 'tho', 'dep trai lam');
+    wp_die();
+    
+}
+
+
+
+
+
+
+
+
+add_action( 'personal_options_update', 'save_extra_user_profile_fields_ukn' );
+add_action( 'edit_user_profile_update', 'save_extra_user_profile_fields_ukn' );
+
+function save_extra_user_profile_fields_ukn( $user_id ) {
+    if(!current_user_can( 'edit_user', $user_id ) ) { 
+        return false; 
+    }
+    update_user_meta($user_id, 'tho', $_POST["tho"]);
+    update_user_meta($user_id, 'hai', $_POST["hai"]);
+}
+
+add_action( 'show_user_profile', 'extra_user_profile_fields_ukn' );
+add_action( 'edit_user_profile', 'extra_user_profile_fields_ukn' );
+
+function extra_user_profile_fields_ukn( $user ) { 
+    $user_id = $user->ID;
+    ?>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <h3>Extra profile information</h3>
+    <table class="form-table">
+        <tr>
+            <td>Tho</td>
+            <td><input type="text" name="tho">
+            </td>
+        </tr>
+        <tr>
+            <td>Hai</td>
+            <td><input type="text" name="hai">
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        $('input').addClass('regular-text');
+        $('input[name=tho]').val('<?php echo get_the_author_meta('tho', $user->ID); ?>');
+        $('input[name=hai]').val('<?php echo get_the_author_meta('hai', $user->ID); ?>');
+        // Hide some default options //
+            /*
+            $('.user-url-wrap').hide();
+            $('.user-description-wrap').hide();
+            $('.user-profile-picture').hide();
+            $('.user-rich-editing-wrap').hide();
+            $('.user-admin-color-wrap').hide();
+            $('.user-comment-shortcuts-wrap').hide();
+            $('.show-admin-bar').hide();
+            $('.user-language-wrap').hide();
+            //*/
+    </script>
+<?php 
+}
+
+function new_modify_user_table_ukn( $column ) {
+    $column['tho'] = 'Tho';
+    $column['hai'] = 'Hai';
+    return $column;
+}
+add_filter( 'manage_users_columns', 'new_modify_user_table_ukn' );
+
+function new_modify_user_table_row_ukn( $val, $column_name, $user_id ) {
+    $meta = get_user_meta($user_id);
+    switch ($column_name) {
+        case 'tho' :
+            $tho = $meta['tho'][0];
+            return $tho;
+        case 'hai' :
+            $hai = $meta['hai'][0];
+            return $hai;
+        default:
+    }
+    return $val;
+}
+add_filter( 'manage_users_custom_column', 'new_modify_user_table_row_ukn', 10, 3 );
+
+
+
 ?>
