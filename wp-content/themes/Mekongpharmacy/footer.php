@@ -139,5 +139,6 @@
 	</div>
 </footer>
 <?php wp_footer(); ?>
+<script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/quick-order.js"></script>
 </body>
 </html>

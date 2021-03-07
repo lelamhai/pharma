@@ -7,6 +7,7 @@
 	<meta property="fb:app_id" content="278927666417419" />
 	<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1.0 ">
 	<link rel="profile" href="http://gmgp.org/xfn/11" />
+	
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 	<?php
 	if(is_singular() && get_field('keywords',get_the_ID()) !=''){
@@ -43,6 +44,7 @@
 		echo '<meta name="keywords" content="'.$keywords.'">';
 	}
 	?>
+
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -75,13 +77,19 @@
 								</div>
 							</div>
 							<div class="col-4">
+								<div class="wrap-button">
+									<div class="button-signin">
+										<button>Đăng nhập</button>
+									</div>
 
-								
-								<div class="contact">
-
-									<a href="tel:<?php the_field('sdt_chinh','option');?>"><i class="fas fa-phone-alt"></i>Hotline (miễn phí): <?php the_field('sdt_chinh','option');?></a>
-									
+									<div class="button-registration">
+										<button>Tạo tài khoản</button>
+									</div>
 								</div>
+								
+								<!-- <div class="contact">
+									<a href="tel:<?php the_field('sdt_chinh','option');?>"><i class="fas fa-phone-alt"></i>Hotline (miễn phí): <?php the_field('sdt_chinh','option');?></a>
+								</div> -->
 							</div>
 						</div>
 					</div>

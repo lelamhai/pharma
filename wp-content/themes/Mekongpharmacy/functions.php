@@ -146,6 +146,13 @@ function namlbn_styles(){
 	wp_register_style( $handle = 'google-fonts', $src = 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;1,100;1,300;1,400;1,500;1,700;1,800&display=swap', $deps = array(), $ver = false, $media = 'all' );
 	wp_enqueue_style('google-fonts');
 
+	// HaiLL
+	wp_register_style( $handle = 'style', $src = get_template_directory_uri().'/assets/css/quick-order/quick_order.css', $deps = array(), $ver = false, $media = 'all' );
+	wp_enqueue_style('style');
+
+	wp_register_style( $handle = 'custome', $src = get_template_directory_uri().'/assets/css/custome.css', $deps = array(), $ver = false, $media = 'all' );
+	wp_enqueue_style('custome');
+
 }
 add_action( 'wp_enqueue_scripts', 'namlbn_styles' );
 
@@ -174,7 +181,7 @@ function theme_register_scripts() {
 		wp_localize_script( 'site-mobile', 'php_array', $php_array );
 		wp_enqueue_script( 'site-mobile' );
 	} else {
-		wp_register_script( 'site-dsk',esc_url( trailingslashit( get_template_directory_uri() ) . 'assets/js/'.'site-dsk.js'), array( 'jquery', 'site-js' ), '1.0', true ); 	
+		//wp_register_script( 'site-dsk',esc_url( trailingslashit( get_template_directory_uri() ) . 'assets/js/'.'site-dsk.js'), array( 'jquery', 'site-js' ), '1.0', true ); 	
 		wp_localize_script( 'site-dsk', 'php_array', $php_array );
 		wp_enqueue_script( 'site-dsk' );
 	}
@@ -320,46 +327,62 @@ function load_posts_by_ajax_callback() {
 
 
 
+add_action( 'personal_options_update', 'save_extra_user_profile_fields_lzg' );
+add_action( 'edit_user_profile_update', 'save_extra_user_profile_fields_lzg' );
 
-
-
-
-
-add_action( 'personal_options_update', 'save_extra_user_profile_fields_ukn' );
-add_action( 'edit_user_profile_update', 'save_extra_user_profile_fields_ukn' );
-
-function save_extra_user_profile_fields_ukn( $user_id ) {
+function save_extra_user_profile_fields_lzg( $user_id ) {
     if(!current_user_can( 'edit_user', $user_id ) ) { 
         return false; 
     }
-    update_user_meta($user_id, 'tho', $_POST["tho"]);
-    update_user_meta($user_id, 'hai', $_POST["hai"]);
+    update_user_meta($user_id, 'MaSP', $_POST["MaSP"]);
+    update_user_meta($user_id, 'TenSP', $_POST["TenSP"]);
+    update_user_meta($user_id, 'SoDT', $_POST["SoDT"]);
+    update_user_meta($user_id, 'SoLuong', $_POST["SoLuong"]);
+    update_user_meta($user_id, 'DiaChi', $_POST["DiaChi"]);
 }
 
-add_action( 'show_user_profile', 'extra_user_profile_fields_ukn' );
-add_action( 'edit_user_profile', 'extra_user_profile_fields_ukn' );
+add_action( 'show_user_profile', 'extra_user_profile_fields_lzg' );
+add_action( 'edit_user_profile', 'extra_user_profile_fields_lzg' );
 
-function extra_user_profile_fields_ukn( $user ) { 
+function extra_user_profile_fields_lzg( $user ) { 
     $user_id = $user->ID;
     ?>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.0.js"></script>
     <h3>Extra profile information</h3>
     <table class="form-table">
         <tr>
-            <td>Tho</td>
-            <td><input type="text" name="tho">
+            <td>MaSP</td>
+            <td><input type="text" name="MaSP">
             </td>
         </tr>
         <tr>
-            <td>Hai</td>
-            <td><input type="text" name="hai">
+            <td>TenSP</td>
+            <td><input type="text" name="TenSP">
+            </td>
+        </tr>
+        <tr>
+            <td>SoDT</td>
+            <td><input type="text" name="SoDT">
+            </td>
+        </tr>
+        <tr>
+            <td>SoLuong</td>
+            <td><input type="number" name="SoLuong"autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <td>DiaChi</td>
+            <td><input type="text" name="DiaChi"autocomplete="off">
             </td>
         </tr>
     </table>
     <script type="text/javascript">
         $('input').addClass('regular-text');
-        $('input[name=tho]').val('<?php echo get_the_author_meta('tho', $user->ID); ?>');
-        $('input[name=hai]').val('<?php echo get_the_author_meta('hai', $user->ID); ?>');
+        $('input[name=MaSP]').val('<?php echo get_the_author_meta('MaSP', $user->ID); ?>');
+        $('input[name=TenSP]').val('<?php echo get_the_author_meta('TenSP', $user->ID); ?>');
+        $('input[name=SoDT]').val('<?php echo get_the_author_meta('SoDT', $user->ID); ?>');
+        $('input[name=SoLuong]').val('<?php echo get_the_author_meta('SoLuong', $user->ID); ?>');
+        $('input[name=DiaChi]').val('<?php echo get_the_author_meta('DiaChi', $user->ID); ?>');
         // Hide some default options //
             /*
             $('.user-url-wrap').hide();
@@ -375,28 +398,40 @@ function extra_user_profile_fields_ukn( $user ) {
 <?php 
 }
 
-function new_modify_user_table_ukn( $column ) {
-    $column['tho'] = 'Tho';
-    $column['hai'] = 'Hai';
+function new_modify_user_table_lzg( $column ) {
+    $column['MaSP'] = 'MaSP';
+    $column['TenSP'] = 'TenSP';
+    $column['SoDT'] = 'SoDT';
+    $column['SoLuong'] = 'SoLuong';
+    $column['DiaChi'] = 'DiaChi';
     return $column;
 }
-add_filter( 'manage_users_columns', 'new_modify_user_table_ukn' );
+add_filter( 'manage_users_columns', 'new_modify_user_table_lzg' );
 
-function new_modify_user_table_row_ukn( $val, $column_name, $user_id ) {
+function new_modify_user_table_row_lzg( $val, $column_name, $user_id ) {
     $meta = get_user_meta($user_id);
     switch ($column_name) {
-        case 'tho' :
-            $tho = $meta['tho'][0];
-            return $tho;
-        case 'hai' :
-            $hai = $meta['hai'][0];
-            return $hai;
+        case 'MaSP' :
+            $MaSP = $meta['MaSP'][0];
+            return $MaSP;
+        case 'TenSP' :
+            $TenSP = $meta['TenSP'][0];
+            return $TenSP;
+        case 'SoDT' :
+            $SoDT = $meta['SoDT'][0];
+            return $SoDT;
+        case 'SoLuong' :
+            $SoLuong = $meta['SoLuong'][0];
+            return $SoLuong;
+        case 'DiaChi' :
+            $DiaChi = $meta['DiaChi'][0];
+            return $DiaChi;
         default:
     }
     return $val;
 }
-add_filter( 'manage_users_custom_column', 'new_modify_user_table_row_ukn', 10, 3 );
+add_filter( 'manage_users_custom_column', 'new_modify_user_table_row_lzg', 10, 3 );
 
-
+// add 
 
 ?>

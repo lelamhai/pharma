@@ -1,0 +1,62 @@
+2021-02-22T14:10:25+00:00 CRITICAL syntax error, unexpected '}', expecting end of file in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 316
+
+2021-02-22T14:10:34+00:00 CRITICAL syntax error, unexpected '}', expecting end of file in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 316
+
+2021-02-22T14:15:20+00:00 CRITICAL syntax error, unexpected '$user_id' (T_VARIABLE) in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 316
+
+2021-02-22T14:16:37+00:00 CRITICAL syntax error, unexpected '$user_id' (T_VARIABLE) in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 316
+
+2021-02-22T14:18:07+00:00 CRITICAL syntax error, unexpected '$user_id' (T_VARIABLE) in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 312
+
+2021-02-22T14:42:02+00:00 CRITICAL syntax error, unexpected '}' in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 320
+
+2021-02-22T14:42:10+00:00 CRITICAL syntax error, unexpected '}' in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 320
+
+2021-02-22T14:43:56+00:00 CRITICAL syntax error, unexpected '}' in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 320
+
+2021-02-22T14:43:58+00:00 CRITICAL syntax error, unexpected '}' in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 320
+
+2021-02-22T14:43:59+00:00 CRITICAL syntax error, unexpected '}' in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 320
+
+2021-02-22T14:56:51+00:00 CRITICAL syntax error, unexpected ')' in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 291
+
+2021-02-22T15:00:32+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function add_user_meta(), 2 passed in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 293 and at least 3 expected in C:\xampp\htdocs\pharma\wp-includes\user.php:973
+Stack trace:
+#0 C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php(293): add_user_meta(5, 'lelamhai')
+#1 C:\xampp\htdocs\pharma\wp-includes\class-wp-hook.php(287): process_post('')
+#2 C:\xampp\htdocs\pharma\wp-includes\class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#3 C:\xampp\htdocs\pharma\wp-includes\plugin.php(484): WP_Hook->do_action(Array)
+#4 C:\xampp\htdocs\pharma\wp-settings.php(557): do_action('init')
+#5 C:\xampp\htdocs\pharma\wp-config.php(180): require_once('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\pharma\wp-load.php(37): require_once('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\pharma\wp-cron.php(44): require_once('C:\\xampp\\htdocs...')
+#8 {main}
+  thrown in C:\xampp\htdocs\pharma\wp-includes\user.php on line 973
+
+2021-02-22T15:00:32+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function add_user_meta(), 2 passed in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 293 and at least 3 expected in C:\xampp\htdocs\pharma\wp-includes\user.php:973
+Stack trace:
+#0 C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php(293): add_user_meta(5, 'lelamhai')
+#1 C:\xampp\htdocs\pharma\wp-includes\class-wp-hook.php(287): process_post('')
+#2 C:\xampp\htdocs\pharma\wp-includes\class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#3 C:\xampp\htdocs\pharma\wp-includes\plugin.php(484): WP_Hook->do_action(Array)
+#4 C:\xampp\htdocs\pharma\wp-settings.php(557): do_action('init')
+#5 C:\xampp\htdocs\pharma\wp-config.php(180): require_once('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\pharma\wp-load.php(37): require_once('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\pharma\wp-blog-header.php(13): require_once('C:\\xampp\\htdocs...')
+#8 C:\xampp\htdocs\pharma\index.php(17): require('C:\\xampp\\htdocs...')
+#9 {main}
+  in C:\xampp\htdocs\pharma\wp-includes\user.php on line 973
+
+2021-02-22T15:01:00+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function add_user_meta(), 2 passed in C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php on line 293 and at least 3 expected in C:\xampp\htdocs\pharma\wp-includes\user.php:973
+Stack trace:
+#0 C:\xampp\htdocs\pharma\wp-content\themes\Mekongpharmacy\functions.php(293): add_user_meta(5, 'lelamhai')
+#1 C:\xampp\htdocs\pharma\wp-includes\class-wp-hook.php(287): process_post('')
+#2 C:\xampp\htdocs\pharma\wp-includes\class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#3 C:\xampp\htdocs\pharma\wp-includes\plugin.php(484): WP_Hook->do_action(Array)
+#4 C:\xampp\htdocs\pharma\wp-settings.php(557): do_action('init')
+#5 C:\xampp\htdocs\pharma\wp-config.php(180): require_once('C:\\xampp\\htdocs...')
+#6 C:\xampp\htdocs\pharma\wp-load.php(37): require_once('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\pharma\wp-admin\admin-ajax.php(22): require_once('C:\\xampp\\htdocs...')
+#8 {main}
+  thrown in C:\xampp\htdocs\pharma\wp-includes\user.php on line 973
+
