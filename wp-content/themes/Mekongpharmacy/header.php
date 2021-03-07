@@ -7,6 +7,7 @@
 	<meta property="fb:app_id" content="278927666417419" />
 	<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1.0 ">
 	<link rel="profile" href="http://gmgp.org/xfn/11" />
+
 	
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 	<?php
@@ -44,10 +45,13 @@
 		echo '<meta name="keywords" content="'.$keywords.'">';
 	}
 	?>
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLogin">
+  Launch demo modal
+</button>
 	<header id="site-header">
 		<?php 
 		if (!wp_is_mobile()) {
@@ -79,11 +83,25 @@
 							<div class="col-4">
 								<div class="wrap-button">
 									<div class="button-signin">
-										<button>Đăng nhập</button>
+										<button
+                    type="button" 
+                    class="btn btn-primary" 
+                    data-toggle="modal" 
+                    data-target="#modalLogin"
+                    >
+                      Đăng nhập
+                    </button>
 									</div>
 
 									<div class="button-registration">
-										<button>Tạo tài khoản</button>
+										<button
+                      type="button" 
+                      class="btn btn-primary" 
+                      data-toggle="modal" 
+                      data-target="#exampleModal"
+                    >
+                      Tạo tài khoản
+                    </button>
 									</div>
 								</div>
 								
@@ -153,7 +171,227 @@
 			<?php
 		}
 		?>
-
-
 	</header>
+
+
+<!-- =========== Modal Login ========= -->
+  <div
+      class="modal fade"
+      id="modalLogin"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLoginLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="title-form">
+              <h4>Đăng Nhập Thành Viên</h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+                id="close-popup"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="form-acc">
+              <form action="#" id="myform-s" method="GET">
+                <div class="item-form">
+                  <i class="fas fa-envelope"></i>
+                  <input name="email" id="email-s" placeholder="Nhập email" />
+                </div>
+                <div class="item-form">
+                  <i class="fas fa-lock"></i>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password-s"
+                    placeholder="Nhập mật khẩu"
+                  />
+                  <i class="fas fa-eye pass-icon" id="show-pass-s"></i>
+                  <i
+                    class="fas fa-eye-slash pass-icon"
+                    id="hide-pass-s"
+                    style="display: none"
+                  ></i>
+                </div>
+
+                <div class="item-form">
+                  <label
+                    for="check-remem"
+                    id="container-check-bnt"
+                    class="contain-check-bnt"
+                  >
+                    <input type="checkbox" id="check-remem" />
+                    <span id="text-notify">Nhớ mật khẩu </span>
+                    <a href="#" class="forgot-pass">Quên mật khẩu</a>
+                  </label>
+                </div>
+
+                <div class="item-form">
+                  <button id="btn-submit-log">Đăng Nhập</button>
+                </div>
+                <p class="go-log">
+                  Để Nhận Ưu Đãi Hấp Dẫn,<a href="#"> Đăng Ký Thành Viên</a>.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!-- =========== Modal create account ========= -->
+
+<!-- Modal -->
+<div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="title-form">
+              <h4>Tạo Tài Khoản</h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+                id="close-popup-sign-up"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+		  
+		  
+		  
+          <div class="modal-body">
+            <div class="form-acc">
+              <form action="#" id="myform" method="GET">
+                <div class="item-form">
+                  <p class="title-part">Thông tin tài khoản</p>
+                </div>
+
+                <div class="item-form">
+                  <i class="fas fa-envelope"></i>
+                  <input name="email" id="email" placeholder="Nhập email" />
+                </div>
+                <div class="item-form">
+                  <i class="fas fa-lock"></i>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Nhập mật khẩu"
+                  />
+                  <i class="fas fa-eye pass-icon" id="show-pass"></i>
+                  <i
+                    class="fas fa-eye-slash pass-icon"
+                    id="hide-pass"
+                    style="display: none"
+                  ></i>
+                </div>
+                <div class="item-form">
+                  <i class="fas fa-lock"></i>
+                  <input
+                    type="password"
+                    name="re-password"
+                    id="re-password"
+                    placeholder="Xác nhận mật khẩu"
+                  />
+                </div>
+                <div class="item-form">
+                  <label for="" class="title-radio">
+                    <span>Loại tài khoản</span>
+                  </label>
+                  <div class="container-bnt">
+                    <label for="a" class="contain-radio-bnt">
+                      <input type="radio" name="type-acc" id="a" checked />
+                      <span>Người Tiêu Dùng</span>
+                    </label>
+                    <label for="b" class="contain-radio-bnt">
+                      <input type="radio" name="type-acc" id="b" />
+                      <span>Nhà Thuốc</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="item-form">
+                  <p class="title-part" style="padding-top: 30px">
+                    Thông tin người dùng
+                  </p>
+                </div>
+                <div class="item-form">
+                  <i class="fas fa-user"></i>
+                  <input
+                    type="text"
+                    name="name-user"
+                    id="name-user"
+                    placeholder="Nhập tên người dùng"
+                  />
+                </div>
+                <div class="item-form">
+                  <i class="fas fa-phone"></i>
+                  <input
+                    type="text"
+                    name="phonenumber"
+                    id="phonenumber"
+                    placeholder="Nhập số điện thoại"
+                  />
+                </div>
+                <div class="item-form">
+                  <i class="fas fa-map-marker-alt special-i"></i>
+                  <textarea
+                    cols="30"
+                    rows="5"
+                    placeholder="Nhập địa chỉ"
+                    name="address"
+                    id="address"
+                  ></textarea>
+                </div>
+
+                <div class="item-form">
+                  <label
+                    for="check-notify"
+                    id="container-check-bnt"
+                    class="contain-check-bnt"
+                  >
+                    <input
+                      type="checkbox"
+                      name="check-notify"
+                      id="check-notify"
+                    />
+                    <span id="text-notify-sign-up"
+                      >Tôi đã đọc và đồng ý với
+                      <a href="#" target="_blank">Điều khoản sử dụng</a>
+                    </span>
+                  </label>
+                </div>
+                <p class="go-log">
+                  Nếu Bạn Có Tài Khoản,Vui Lòng <a href="#">Đăng Nhập</a>.
+                </p>
+                <div class="item-form">
+                  <button id="btn-submit-sign-up">Tạo Tài Khoản</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 	<div id="site-wrapper">

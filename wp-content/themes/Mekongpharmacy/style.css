@@ -163,3 +163,7 @@ padding: 10px 0;
 .namlbn-breadcrumb p{
   margin: 0;
 }
+
+.modal-header {
+  border-bottom: none;;
+}

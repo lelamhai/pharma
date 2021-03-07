@@ -153,6 +153,11 @@ function namlbn_styles(){
 	wp_register_style( $handle = 'custome', $src = get_template_directory_uri().'/assets/css/custome.css', $deps = array(), $ver = false, $media = 'all' );
 	wp_enqueue_style('custome');
 
+	wp_register_style( $handle = 'popup', $src = get_template_directory_uri().'/assets/css/quick-order/popup.css', $deps = array(), $ver = false, $media = 'all' );
+	wp_enqueue_style('popup');
+
+
+
 }
 add_action( 'wp_enqueue_scripts', 'namlbn_styles' );
 
@@ -322,7 +327,6 @@ function load_posts_by_ajax_callback() {
     }
 	update_user_meta( $user_id, 'tho', 'dep trai lam');
     wp_die();
-    
 }
 
 
