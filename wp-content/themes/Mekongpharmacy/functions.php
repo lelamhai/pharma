@@ -338,8 +338,8 @@ function load_posts_by_ajax_callback() {
 	$productDate = $_POST['productDate'];
 
 	// check user id
-	$data = $wpdb->get_results( 'SELECT UserId FROM '.$table_name.' WHERE UserId ='.$userId);
-	if($data[0]->UserId == null)
+	$data = $wpdb->get_results( 'SELECT UserId, ProductId FROM '.$table_name.' WHERE UserId ='.$userId .' AND ProductId = '.$productId);
+	if($data[0]->UserId == null || $data[0]->ProductId == null)
 	{
 		$wpdb->insert( $table_name, array(
 		'UserId' => $userId,
@@ -349,7 +349,7 @@ function load_posts_by_ajax_callback() {
 		));
 	} else {
 		$wpdb->update(
-			$table_name,
+		$table_name,
 			array( 
 				'ProductCount' => $productCount
 			),
@@ -359,16 +359,6 @@ function load_posts_by_ajax_callback() {
 		);
 	}
 
-
-	// $data = $wpdb->get_results( "SELECT 'ProductId' FROM $table_name");
-	// var_dump($data -> ProductId); 
-
-	// $wpdb->insert( $table_name, array(
-	// 	'UserId' => $userId,
-	// 	'ProductId' => $productId,
-	// 	'ProductDate' => $productDate,
-	// 	'ProductCount' => $productCount
-	// ));
 
 }
 ?>
