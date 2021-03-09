@@ -148,10 +148,10 @@ var currentdate = new Date();
 $( ".buttonMinus").click(function() {
     var productId = $(this).data("product");
 	var idUser = $('#userId').val();
-    var value = $('#value-'+productId).val();
+    var value = parseInt($('#value-'+productId).val());
     if(value > 0)
     {
-        value --;
+        value = value - 1;
         $('#value-'+productId).val(value);
     }
 	var data = {
@@ -168,7 +168,26 @@ $( ".buttonMinus").click(function() {
 	});
 });
 
+$( ".buttonAdd").click(function() {
+    var productId = $(this).data("product");
+	var idUser = $('#userId').val();
+    var value = parseInt($('#value-'+productId).val())
+    value = value + 1;
+	$('#value-'+productId).val(value);
+    
+	var data = {
+			'action': 'load_posts_by_ajax',
+			'userId': idUser,
+			'productId': productId,
+			'productCount': value,
+			'productDate': currentdate,
+			'security': '<?php echo wp_create_nonce("load_more_posts_policy"); ?>'
+	};
 
+	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
+		console.log(response);
+	});
+});
 
 
 

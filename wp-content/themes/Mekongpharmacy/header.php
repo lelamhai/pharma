@@ -112,7 +112,7 @@
 								</div>
 							</div>
 							<div class="col-4">
-                  <input type="text" id="userId" value="<?php echo $_COOKIE["idUser"];?>">
+                  <input type="hide" id="userId" value="<?php echo $_COOKIE["idUser"];?>">
                 <?php
                  if($_COOKIE["username"] != null && $_COOKIE["password"] != null)
                   {
