@@ -1,3 +1,37 @@
+<?php
+
+ if($_POST['username'] !="" && $_POST['password'] != "")
+ {
+    $user_data = array();
+    // $user_data['user_login'] = "haile@aaa.vom";
+    $user_data['user_login'] = $_POST['username'];
+    $user_data['user_password'] = $_POST['password'];
+    $user_data['remember'] = true;
+    $user = wp_signon( $user_data, false );
+    if($user != null && $user != "")
+    {
+      $cookie_name_Id = 'idUser';
+      $cookie_value_Id =  $user->ID;
+      setcookie($cookie_name_Id, $cookie_value_Id, time() + (86400 * 30), "/"); // 86400 = 1 day
+
+      $cookie_name = 'username';
+      $cookie_value =  $_POST['username'];
+      setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+
+      $cookie_password = 'password';
+      $cookie_password_value =  $_POST['password'];
+      setcookie($cookie_password, $cookie_password_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+
+
+      if($_COOKIE["username"] != null && $_COOKIE["password"] != null)
+      {
+        wp_redirect(home_url()."/dat-hang-nhanh");
+      }
+    }
+ }
+ ?>
+
+
 <!DOCTYPE html>
 <!--[if IE 8]> <html <?php language_attributes(); ?> class="ie8"> <![endif]-->
 <!--[if !IE]> <html <?php language_attributes(); ?>> <![endif]-->
@@ -49,9 +83,6 @@
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLogin">
-  Launch demo modal
-</button>
 	<header id="site-header">
 		<?php 
 		if (!wp_is_mobile()) {
@@ -81,7 +112,46 @@
 								</div>
 							</div>
 							<div class="col-4">
-								<div class="wrap-button">
+                  <input type="text" id="userId" value="<?php echo $_COOKIE["idUser"];?>">
+                <?php
+                 if($_COOKIE["username"] != null && $_COOKIE["password"] != null)
+                  {
+                    ?>
+                        <div class="login-finish">
+                          Chào <?php echo $_COOKIE["username"];?>
+                        </div>
+
+                    <?php
+                  } else {
+                    ?>
+                      <div class="wrap-button">
+                          <div class="button-signin">
+                            <button
+                            type="button" 
+                            class="btn btn-primary" 
+                            data-toggle="modal" 
+                            data-target="#modalLogin"
+                            >
+                              Đăng nhập
+                            </button>
+                          </div>
+
+                          <div class="button-registration">
+                            <button
+                              type="button" 
+                              class="btn btn-primary" 
+                              data-toggle="modal" 
+                              data-target="#exampleModal"
+                            >
+                              Tạo tài khoản
+                            </button>
+                          </div>
+                        </div>
+                    <?php
+                  }
+                ?>
+ 
+<!--								<div class="wrap-button">
 									<div class="button-signin">
 										<button
                     type="button" 
@@ -104,7 +174,9 @@
                     </button>
 									</div>
 								</div>
-								
+								<div class="login-finish">
+                  Chào <?php echo $_COOKIE["username"];?>
+                </div> -->
 								<!-- <div class="contact">
 									<a href="tel:<?php the_field('sdt_chinh','option');?>"><i class="fas fa-phone-alt"></i>Hotline (miễn phí): <?php the_field('sdt_chinh','option');?></a>
 								</div> -->
@@ -201,10 +273,10 @@
           </div>
           <div class="modal-body">
             <div class="form-acc">
-              <form action="#" id="myform-s" method="GET">
+              <form action="#" id="myform-s" method="POST">
                 <div class="item-form">
                   <i class="fas fa-envelope"></i>
-                  <input name="email" id="email-s" placeholder="Nhập email" />
+                  <input name="username" id="email-s" placeholder="Nhập email" />
                 </div>
                 <div class="item-form">
                   <i class="fas fa-lock"></i>
@@ -280,7 +352,7 @@
 		  
           <div class="modal-body">
             <div class="form-acc">
-              <form action="#" id="myform" method="GET">
+              <form action="#" id="myform" method="POST">
                 <div class="item-form">
                   <p class="title-part">Thông tin tài khoản</p>
                 </div>

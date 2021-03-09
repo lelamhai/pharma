@@ -307,135 +307,68 @@ function process_post() {
 	 }
 }
 
+//====== Create table Products =====\
+	global $wpdb;
+	$charset_collate = $wpdb->get_charset_collate();
+	$table_name = $wpdb->prefix . 'quick_order';
 
+	$sql = "CREATE TABLE $table_name (
+	ProductId int,
+	ProductName text,
+	ProductCount int,
+	ProductPrice int,
+	ProductDate datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+	UserId int
+	) $charset_collate;";
+
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+	dbDelta( $sql );
+
+
+// ==== Insert data =====\\
 add_action('wp_ajax_load_posts_by_ajax', 'load_posts_by_ajax_callback');
 add_action('wp_ajax_nopriv_load_posts_by_ajax', 'load_posts_by_ajax_callback');
 function load_posts_by_ajax_callback() {
     check_ajax_referer('load_more_posts_policy', 'security');
-	
-	$username = $_POST['username'];
-    $password = $_POST['password'];
-    $email = $_POST['email'];
-	$phone = $_POST['phone'];
-    $user_id = username_exists( $username );
-    if ( !$user_id && email_exists($email) == false ) {
-        $user_id = wp_create_user( $username, $password, $email );
-        if( !is_wp_error($user_id) ) {
-            $user = get_user_by( 'id', $user_id );
-            $user->set_role( 'subscriber' );
-        }
-    }
-	update_user_meta( $user_id, 'tho', 'dep trai lam');
-    wp_die();
+	global $wpdb;
+	$table_name = $wpdb->prefix . "quick_order";
+	$userId = $_POST['userId'];
+	$productId = $_POST['productId'];
+	$productCount = $_POST['productCount'];
+	$productDate = $_POST['productDate'];
+
+	// check user id
+	$data = $wpdb->get_results( 'SELECT UserId FROM '.$table_name.' WHERE UserId ='.$userId);
+	if($data[0]->UserId == null)
+	{
+		$wpdb->insert( $table_name, array(
+		'UserId' => $userId,
+		'ProductId' => $productId,
+		'ProductDate' => $productDate,
+		'ProductCount' => $productCount
+		));
+	} else {
+		$wpdb->update(
+			$table_name,
+			array( 
+				'ProductCount' => $productCount
+			),
+			array(
+				'ProductId' => $productId 
+			)
+		);
+	}
+
+
+	// $data = $wpdb->get_results( "SELECT 'ProductId' FROM $table_name");
+	// var_dump($data -> ProductId); 
+
+	// $wpdb->insert( $table_name, array(
+	// 	'UserId' => $userId,
+	// 	'ProductId' => $productId,
+	// 	'ProductDate' => $productDate,
+	// 	'ProductCount' => $productCount
+	// ));
+
 }
-
-
-
-add_action( 'personal_options_update', 'save_extra_user_profile_fields_lzg' );
-add_action( 'edit_user_profile_update', 'save_extra_user_profile_fields_lzg' );
-
-function save_extra_user_profile_fields_lzg( $user_id ) {
-    if(!current_user_can( 'edit_user', $user_id ) ) { 
-        return false; 
-    }
-    update_user_meta($user_id, 'MaSP', $_POST["MaSP"]);
-    update_user_meta($user_id, 'TenSP', $_POST["TenSP"]);
-    update_user_meta($user_id, 'SoDT', $_POST["SoDT"]);
-    update_user_meta($user_id, 'SoLuong', $_POST["SoLuong"]);
-    update_user_meta($user_id, 'DiaChi', $_POST["DiaChi"]);
-}
-
-add_action( 'show_user_profile', 'extra_user_profile_fields_lzg' );
-add_action( 'edit_user_profile', 'extra_user_profile_fields_lzg' );
-
-function extra_user_profile_fields_lzg( $user ) { 
-    $user_id = $user->ID;
-    ?>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.0.js"></script>
-    <h3>Extra profile information</h3>
-    <table class="form-table">
-        <tr>
-            <td>MaSP</td>
-            <td><input type="text" name="MaSP">
-            </td>
-        </tr>
-        <tr>
-            <td>TenSP</td>
-            <td><input type="text" name="TenSP">
-            </td>
-        </tr>
-        <tr>
-            <td>SoDT</td>
-            <td><input type="text" name="SoDT">
-            </td>
-        </tr>
-        <tr>
-            <td>SoLuong</td>
-            <td><input type="number" name="SoLuong"autocomplete="off">
-            </td>
-        </tr>
-        <tr>
-            <td>DiaChi</td>
-            <td><input type="text" name="DiaChi"autocomplete="off">
-            </td>
-        </tr>
-    </table>
-    <script type="text/javascript">
-        $('input').addClass('regular-text');
-        $('input[name=MaSP]').val('<?php echo get_the_author_meta('MaSP', $user->ID); ?>');
-        $('input[name=TenSP]').val('<?php echo get_the_author_meta('TenSP', $user->ID); ?>');
-        $('input[name=SoDT]').val('<?php echo get_the_author_meta('SoDT', $user->ID); ?>');
-        $('input[name=SoLuong]').val('<?php echo get_the_author_meta('SoLuong', $user->ID); ?>');
-        $('input[name=DiaChi]').val('<?php echo get_the_author_meta('DiaChi', $user->ID); ?>');
-        // Hide some default options //
-            /*
-            $('.user-url-wrap').hide();
-            $('.user-description-wrap').hide();
-            $('.user-profile-picture').hide();
-            $('.user-rich-editing-wrap').hide();
-            $('.user-admin-color-wrap').hide();
-            $('.user-comment-shortcuts-wrap').hide();
-            $('.show-admin-bar').hide();
-            $('.user-language-wrap').hide();
-            //*/
-    </script>
-<?php 
-}
-
-function new_modify_user_table_lzg( $column ) {
-    $column['MaSP'] = 'MaSP';
-    $column['TenSP'] = 'TenSP';
-    $column['SoDT'] = 'SoDT';
-    $column['SoLuong'] = 'SoLuong';
-    $column['DiaChi'] = 'DiaChi';
-    return $column;
-}
-add_filter( 'manage_users_columns', 'new_modify_user_table_lzg' );
-
-function new_modify_user_table_row_lzg( $val, $column_name, $user_id ) {
-    $meta = get_user_meta($user_id);
-    switch ($column_name) {
-        case 'MaSP' :
-            $MaSP = $meta['MaSP'][0];
-            return $MaSP;
-        case 'TenSP' :
-            $TenSP = $meta['TenSP'][0];
-            return $TenSP;
-        case 'SoDT' :
-            $SoDT = $meta['SoDT'][0];
-            return $SoDT;
-        case 'SoLuong' :
-            $SoLuong = $meta['SoLuong'][0];
-            return $SoLuong;
-        case 'DiaChi' :
-            $DiaChi = $meta['DiaChi'][0];
-            return $DiaChi;
-        default:
-    }
-    return $val;
-}
-add_filter( 'manage_users_custom_column', 'new_modify_user_table_row_lzg', 10, 3 );
-
-// add 
-
 ?>

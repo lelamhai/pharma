@@ -143,5 +143,35 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/quick-order.js"></script>
+<script>
+var currentdate = new Date();
+$( ".buttonMinus").click(function() {
+    var productId = $(this).data("product");
+	var idUser = $('#userId').val();
+    var value = $('#value-'+productId).val();
+    if(value > 0)
+    {
+        value --;
+        $('#value-'+productId).val(value);
+    }
+	var data = {
+			'action': 'load_posts_by_ajax',
+			'userId': idUser,
+			'productId': productId,
+			'productCount': value,
+			'productDate': currentdate,
+			'security': '<?php echo wp_create_nonce("load_more_posts_policy"); ?>'
+	};
+
+	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
+		console.log(response);
+	});
+});
+
+
+
+
+
+</script>
 </body>
 </html>

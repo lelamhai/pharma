@@ -3,9 +3,29 @@
  * Template name: Đặt Hàng Nhanh
  */
 ?>
+<?php
+global $wpdb;
+
+$idProduct = 2;
+$nameProduct = 'sản phẩm 2';
+$countProduct = 5;
+// $dateProduct = current_time();
+$priceProduct = 500;
+$idUser = 9;
+
+$table_name = $wpdb->prefix . "quick_order";
+$wpdb->insert( $table_name, array(
+    'ProductId'     => $idProduct,
+    'ProductName'   => $nameProduct,
+    'ProductCount'  => $countProduct,
+    'ProductDate'   => $dateProduct,
+    'ProductPrice'  => $priceProduct,
+    'UserId' => $idUser
+) );
+
+?>
+
 <?php get_header(); ?>
-
-
 <div class="DHN-container">
     <div class="DHN-tittle">
         <h1>Đặt hàng nhanh</h1>
@@ -38,329 +58,106 @@
                         </div>
                     </div>
                     <div class="DHN-list-item">
-                        <div class="DHN-list-item-row">
-                            <div class="DHN-sample-img">
-                                <img src="<?php bloginfo('template_url'); ?>/assets/images/quick_order/panadol.jpg" alt="">   
-                            </div>
-                            <div class="DHN-information">
-                                <div class="DHN-name">
-                                    <a title="Panadol extra gsk (h/180v)" href="#">Panadol extra gsk (h/180v)</a>
-                                </div>
-                                <div class="DHN-category">
-                                    <ul>    
-                                        <li>
-                                            <div class="DHN-tag-ban-chay">
-                                                <i class="fas fa-thumbs-up"></i>
-                                                Bán chạy
-                                            </div>                                            
-                                        </li>
-                                        <li>
-                                            <div class="DHN-tag-hoa-don-nhanh" >
-                                                <i class="fas fa-file-invoice-dollar"></i>
-                                                Hóa đơn nhanh
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="DHN-tag-giao-nhanh">
-                                                <i class="fas fa-shipping-fast"></i>
-                                            Giao nhanh
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="DHN-information2">
-                                <div class="DHN-capacity">
-                                    <small>Hộp 15 vỉ x 12 viên</small>
-                                </div>                                
-                            </div>
-                            <div class="DHN-information3">
-                                <div class="DHN-price">
-                                    <span class="DHN-number">234.400</span>
-                                    <span class="DHN-unit">đ</span>
-                                </div>
-                                <div class="DHN-quantity">
-                                    <button class="DHN-minus" data-operation="-" data-target="qty.qtyBtn">
-                                        <i class="fas fa-minus-circle"></i>
-                                    </button>
-                                    <input class="DHN-number" type="text" placeholder="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-                                    <button class="DHN-plus" data-operation="+" data-target="qty.qtyBtn">
-                                        <i class="fas fa-plus-circle"></i>
-                                    </button>
-                                </div>
-                            </div>
+
+                    <?php
+                    $args = array(
+                        'post_type' => 'product',
+                        'posts_per_page' => 10
+                    ); 
+                    $the_query = new WP_Query( $args );
+                    if ( $the_query->have_posts() ) {
+                        while ( $the_query->have_posts() ) {
+                            $the_query->the_post();
+                            ?>
                             
-                        </div>
-                        <div class="DHN-list-item-row">
-                            <div class="DHN-sample-img">
-                                <!-- <img src="img/maverlon.jpg" alt="maverlon"> -->
-                                <img src="<?php bloginfo('template_url'); ?>/assets/images/quick_order/panadol.jpg" alt="">   
-                            </div>
-                            <div class="DHN-information">
-                                <div class="DHN-name">
-                                    <a title="Marvelon bayer (h/21v)" href="#">Marvelon bayer (h/21v)</a>
-                                </div>
-                                <div class="DHN-category">
-                                    <ul>
-                                        <li>
-                                            <div class="DHN-tag-ban-chay">
-                                                <i class="fas fa-thumbs-up"></i>
-                                                Bán chạy
-                                            </div>                                            
-                                        </li>
-                                        <li>
-                                            <div class="DHN-tag-hoa-don-nhanh" >
-                                                <i class="fas fa-file-invoice-dollar"></i>
-                                                Hóa đơn nhanh
+                              <div class="DHN-list-item-row">
+                                    <div class="DHN-sample-img">
+                                            <?php echo get_the_post_thumbnail( $_post->ID, 'full' );?>
+                                            <!-- <img src="<?php bloginfo('template_url'); ?>/assets/images/quick_order/panadol.jpg" alt="">    -->
+                                        </div>
+                                        <div class="DHN-information">
+                                            <div class="DHN-name">
+                                                <a title="Panadol extra gsk (h/180v)" href="#"><?php the_title()?></a>
                                             </div>
-                                        </li>
-                                        <li>
-                                            <div class="DHN-tag-giao-nhanh">
-                                                <i class="fas fa-shipping-fast"></i>
-                                            Giao nhanh
+                                            <div class="DHN-category">
+                                                <ul>    
+                                                    <li>
+                                                        <div class="DHN-tag-ban-chay">
+                                                            <i class="fas fa-thumbs-up"></i>
+                                                            Bán chạy
+                                                        </div>                                            
+                                                    </li>
+                                                    <li>
+                                                        <div class="DHN-tag-hoa-don-nhanh" >
+                                                            <i class="fas fa-file-invoice-dollar"></i>
+                                                            Hóa đơn nhanh
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="DHN-tag-giao-nhanh">
+                                                            <i class="fas fa-shipping-fast"></i>
+                                                        Giao nhanh
+                                                        </div>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="DHN-information2">
-                                <div class="DHN-capacity">
-                                    <small>Hộp 1 vỉ x 21 viên</small>
-                                </div>                                
-                            </div>
-                            <div class="DHN-information3">
-                                <div class="DHN-price">
-                                    <span class="DHN-number">71.500</span>
-                                    <span class="DHN-unit">đ</span>
-                                </div>
-                                <div class="DHN-quantity">
-                                    <button class="DHN-minus" data-operation="-">
-                                        <i class="fas fa-minus-circle"></i>
-                                    </button>
-                                    <input class="DHN-number" type="text" placeholder="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-                                    <button class="DHN-plus" data-operation="+">
-                                        <i class="fas fa-plus-circle"></i>
-                                    </button>
-                                </div>
-                            </div>
+                                        </div>
+                                        <div class="DHN-information2">
+                                            <div class="DHN-capacity">
+                                                <small>Hộp 15 vỉ x 12 viên</small>
+                                            </div>                                
+                                        </div>
+                                        <div class="DHN-information3">
+                                            <div class="DHN-price">
+                                                <span class="DHN-number">
+                                                    <?php 
+                                                        $sale_price = get_field( "_sale_price", $post->ID ); 
+                                                        if($sale_price == null)
+                                                        {
+                                                            $value = get_field( "_regular_price", $post->ID );
+                                                            echo number_format(intval($value));
+                                                        } else {
+                                                            echo number_format(intval($sale_price));
+                                                        }
+                                                    ?>
+                                                </span>
+                                                <span class="DHN-unit">đ</span>
+                                            </div>
+                                            <div class="DHN-quantity">
+                                                <button class="DHN-minus buttonMinus" data-product="<?php echo $post->ID?>">
+                                                    <i class="fas fa-minus-circle"></i>
+                                                </button>
+
+                                                <input id="value-<?php echo $post->ID;?>" class="DHN-number" type="text" value=0></input>
+
+                                                <button class="DHN-plus buttonAdd" data-product="<?php echo $post->ID?>">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
                             
-                        </div>
-                        <div class="DHN-list-item-row">
-                            <div class="DHN-sample-img">
-                                <img src="<?php bloginfo('template_url'); ?>/assets/images/quick_order/panadol.jpg" alt="">   
-                                <!-- <img src="img/phosphalugel.jpg" alt="phosphalugel"> -->
-                            </div>
-                            <div class="DHN-information">
-                                <div class="DHN-name">
-                                    <a title="Phosphalugel boehringer ingelheim (h/26g)" href="#">Phosphalugel boehringer ingelheim (h/26g)</a>
-                                </div>
-                                <div class="DHN-category">
-                                    <ul>
-                                        <li>
-                                            <div class="DHN-tag-ban-chay">
-                                                <i class="fas fa-thumbs-up"></i>
-                                                Bán chạy
-                                            </div>                                            
-                                        </li>
-                                        <li>
-                                            <div class="DHN-tag-hoa-don-nhanh" >
-                                                <i class="fas fa-file-invoice-dollar"></i>
-                                                Hóa đơn nhanh
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="DHN-tag-giao-nhanh">
-                                                <i class="fas fa-shipping-fast"></i>
-                                            Giao nhanh
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="DHN-information2">
-                                <div class="DHN-capacity">
-                                    <small>Hộp 26 gói x 20gr</small>
-                                </div>                                
-                            </div>
-                            <div class="DHN-information3">
-                                <div class="DHN-price">
-                                    <span class="DHN-number">107.900</span>
-                                    <span class="DHN-unit">đ</span>
-                                </div>
-                                <div class="DHN-quantity">
-                                    <button class="DHN-minus" data-operation="-">
-                                        <i class="fas fa-minus-circle"></i>
-                                    </button>
-                                    <input class="DHN-number" type="text" placeholder="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-                                    <button class="DHN-plus" data-operation="+">
-                                        <i class="fas fa-plus-circle"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="DHN-list-item-row">
-                            <div class="DHN-sample-img">
-                                <img src="<?php bloginfo('template_url'); ?>/assets/images/quick_order/panadol.jpg" alt="">   
-                                <!-- <img src="img/panadol.jpg" alt="panadol"> -->
-                            </div>
-                            <div class="DHN-information">
-                                <div class="DHN-name">
-                                    <a title="Panadol extra gsk (h/180v)" href="#">Panadol extra gsk (h/180v)</a>
-                                </div>
-                                <div class="DHN-category">
-                                    <ul>
-                                        <li>
-                                            <div class="DHN-tag-ban-chay">
-                                                <i class="fas fa-thumbs-up"></i>
-                                                Bán chạy
-                                            </div>                                            
-                                        </li>
-                                        <li>
-                                            <div class="DHN-tag-hoa-don-nhanh" >
-                                                <i class="fas fa-file-invoice-dollar"></i>
-                                                Hóa đơn nhanh
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="DHN-tag-giao-nhanh">
-                                                <i class="fas fa-shipping-fast"></i>
-                                            Giao nhanh
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="DHN-information2">
-                                <div class="DHN-capacity">
-                                    <small>Hộp 15 vỉ x 12 viên</small>
-                                </div>                                
-                            </div>
-                            <div class="DHN-information3">
-                                <div class="DHN-price">
-                                    <span class="DHN-number">234.400</span>
-                                    <span class="DHN-unit">đ</span>
-                                </div>
-                                <div class="DHN-quantity">
-                                    <button class="DHN-minus" data-operation="-" data-target="qty.qtyBtn">
-                                        <i class="fas fa-minus-circle"></i>
-                                    </button>
-                                    <input class="DHN-number" type="text" placeholder="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-                                    <button class="DHN-plus" data-operation="+" data-target="qty.qtyBtn">
-                                        <i class="fas fa-plus-circle"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="DHN-list-item-row">
-                            <div class="DHN-sample-img">
-                                <img src="<?php bloginfo('template_url'); ?>/assets/images/quick_order/panadol.jpg" alt="">   
-                                <!-- <img src="img/maverlon.jpg" alt="maverlon"> -->
-                            </div>
-                            <div class="DHN-information">
-                                <div class="DHN-name">
-                                    <a title="Marvelon bayer (h/21v)" href="#">Marvelon bayer (h/21v)</a>
-                                </div>
-                                <div class="DHN-category">
-                                    <ul>
-                                        <li>
-                                            <div class="DHN-tag-ban-chay">
-                                                <i class="fas fa-thumbs-up"></i>
-                                                Bán chạy
-                                            </div>                                            
-                                        </li>
-                                        <li>
-                                            <div class="DHN-tag-hoa-don-nhanh" >
-                                                <i class="fas fa-file-invoice-dollar"></i>
-                                                Hóa đơn nhanh
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="DHN-tag-giao-nhanh">
-                                                <i class="fas fa-shipping-fast"></i>
-                                            Giao nhanh
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="DHN-information2">
-                                <div class="DHN-capacity">
-                                    <small>Hộp 1 vỉ x 21 viên</small>
-                                </div>                                
-                            </div>
-                            <div class="DHN-information3">
-                                <div class="DHN-price">
-                                    <span class="DHN-number">71.500</span>
-                                    <span class="DHN-unit">đ</span>
-                                </div>
-                                <div class="DHN-quantity">
-                                    <button class="DHN-minus" data-operation="-">
-                                        <i class="fas fa-minus-circle"></i>
-                                    </button>
-                                    <input class="DHN-number" type="text" placeholder="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-                                    <button class="DHN-plus" data-operation="+">
-                                        <i class="fas fa-plus-circle"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="DHN-list-item-row">
-                            <div class="DHN-sample-img">
-                                <!-- <img src="img/phosphalugel.jpg" alt="phosphalugel"> -->
-                                <img src="<?php bloginfo('template_url'); ?>/assets/images/quick_order/panadol.jpg" alt="">   
-                            </div>
-                            <div class="DHN-information">
-                                <div class="DHN-name">
-                                    <a title="Phosphalugel boehringer ingelheim (h/26g)" href="#">Phosphalugel boehringer ingelheim (h/26g)</a>
-                                </div>
-                                <div class="DHN-category">
-                                    <ul>
-                                        <li>
-                                            <div class="DHN-tag-ban-chay">
-                                                <i class="fas fa-thumbs-up"></i>
-                                                Bán chạy
-                                            </div>                                            
-                                        </li>
-                                        <li>
-                                            <div class="DHN-tag-hoa-don-nhanh" >
-                                                <i class="fas fa-file-invoice-dollar"></i>
-                                                Hóa đơn nhanh
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="DHN-tag-giao-nhanh">
-                                                <i class="fas fa-shipping-fast"></i>
-                                            Giao nhanh
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="DHN-information2">
-                                <div class="DHN-capacity">
-                                    <small>Hộp 26 gói x 20gr</small>
-                                </div>                                
-                            </div>
-                            <div class="DHN-information3">
-                                <div class="DHN-price">
-                                    <span class="DHN-number">107.900</span>
-                                    <span class="DHN-unit">đ</span>
-                                </div>
-                                <div class="DHN-quantity">
-                                    <button class="DHN-minus" data-operation="-">
-                                        <i class="fas fa-minus-circle"></i>
-                                    </button>
-                                    <input class="DHN-number" type="text" placeholder="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-                                    <button class="DHN-plus" data-operation="+">
-                                        <i class="fas fa-plus-circle"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                        </div>
+                            <?php
+                        }
+                    } else {
+                    }
+                    wp_reset_postdata();
+                    ?>
+
+
+
+
+
+
+
+
+                      
+
+
+                     
+                        
+                        
                     </div>
                 </div>
                 
