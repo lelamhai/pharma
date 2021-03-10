@@ -335,6 +335,7 @@ function load_posts_by_ajax_callback() {
 	$userId = $_POST['userId'];
 	$productId = $_POST['productId'];
 	$productCount = $_POST['productCount'];
+	$productPrice = $_POST['productPrice'];
 	$productDate = $_POST['productDate'];
 
 	// check user id
@@ -345,8 +346,11 @@ function load_posts_by_ajax_callback() {
 		'UserId' => $userId,
 		'ProductId' => $productId,
 		'ProductDate' => $productDate,
+		'ProductPrice' => $productPrice,
 		'ProductCount' => $productCount
 		));
+
+		add_post_meta($userId, $productId, $productCount);
 	} else {
 		$wpdb->update(
 		$table_name,
@@ -357,8 +361,36 @@ function load_posts_by_ajax_callback() {
 				'ProductId' => $productId 
 			)
 		);
+
+		update_post_meta ( $userId, $productId, $productCount);
 	}
-
-
 }
+
+// ==== Total count, price ===\\
+
+// add_action('wp_ajax_load_total_by_ajax', 'load_total_by_ajax_callback');
+// add_action('wp_ajax_nopriv_load_total_by_ajax', 'load_total_by_ajax_callback');
+// function load_total_by_ajax_callback() {
+//     check_ajax_referer('load_total_policy', 'security');
+// 	global $wpdb;
+// 	$table_name = $wpdb->prefix . "quick_order";
+// 	$userId = $_POST['userId'];
+
+// 	$data = $wpdb->get_results( 'SELECT * FROM '.$table_name.' WHERE UserId ='.$userId);
+// 	$totalCount = 0;
+// 	$totalPrice = 0;
+// 	for($i=0; $i < count($data); $i++)
+// 	{
+// 		$totalCount = $totalCount + $data[$i] -> ProductCount;
+// 		$totalPrice = $totalPrice + ($data[$i] -> ProductPrice *  $data[$i] -> ProductCount);
+// 	}
+
+// 	$array = array($totalCount, $totalCount);
+// 	echo $totalPrice;
+// }
+
+
+
+
+
 ?>

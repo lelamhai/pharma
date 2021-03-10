@@ -4,24 +4,14 @@
  */
 ?>
 <?php
-global $wpdb;
-
-$idProduct = 2;
-$nameProduct = 'sản phẩm 2';
-$countProduct = 5;
-// $dateProduct = current_time();
-$priceProduct = 500;
-$idUser = 9;
-
-$table_name = $wpdb->prefix . "quick_order";
-$wpdb->insert( $table_name, array(
-    'ProductId'     => $idProduct,
-    'ProductName'   => $nameProduct,
-    'ProductCount'  => $countProduct,
-    'ProductDate'   => $dateProduct,
-    'ProductPrice'  => $priceProduct,
-    'UserId' => $idUser
-) );
+$data = $wpdb->get_results( 'SELECT * FROM '.$table_name.' WHERE UserId ='.$_COOKIE["idUser"]);
+$totalCount = 0;
+$totalPrice = 0;
+for($i=0; $i < count($data); $i++)
+{
+    $totalCount = $totalCount + $data[$i] -> ProductCount;
+    $totalPrice = $totalPrice + ($data[$i] -> ProductPrice *  $data[$i] -> ProductCount);
+}
 
 ?>
 
@@ -111,15 +101,14 @@ $wpdb->insert( $table_name, array(
                                             <div class="DHN-price">
                                                 <span class="DHN-number">
                                                     <?php 
-                                                        $sale_price = get_field( "_sale_price", $post->ID ); 
-                                                        if($sale_price == null)
+                                                        $value = get_field( "_sale_price", $post->ID );
+                                                        if($value == null)
                                                         {
                                                             $value = get_field( "_regular_price", $post->ID );
-                                                            echo number_format(intval($value));
-                                                        } else {
-                                                            echo number_format(intval($sale_price));
                                                         }
+                                                        echo number_format($value, 0, ',', '.');
                                                     ?>
+                                                    <input type="hidden" id="price-<?php echo $post->ID;?>"  value="<?php echo $value;?>">
                                                 </span>
                                                 <span class="DHN-unit">đ</span>
                                             </div>
@@ -128,7 +117,16 @@ $wpdb->insert( $table_name, array(
                                                     <i class="fas fa-minus-circle"></i>
                                                 </button>
 
-                                                <input id="value-<?php echo $post->ID;?>" class="DHN-number" type="text" value=0></input>
+                                                <input id="value-<?php echo $post->ID;?>" class="DHN-number" type="text" 
+                                                value=<?php 
+                                                    $key_1_value = get_post_meta($_COOKIE["idUser"],  $post->ID, true );
+                                                    if ( ! empty( $key_1_value ) ) {
+                                                        echo $key_1_value;
+                                                    } else {
+                                                        echo 0;
+                                                    }
+                                                        ?>>
+                                                </input>
 
                                                 <button class="DHN-plus buttonAdd" data-product="<?php echo $post->ID?>">
                                                     <i class="fas fa-plus-circle"></i>
@@ -144,20 +142,7 @@ $wpdb->insert( $table_name, array(
                     }
                     wp_reset_postdata();
                     ?>
-
-
-
-
-
-
-
-
-                      
-
-
-                     
-                        
-                        
+    
                     </div>
                 </div>
                 
@@ -165,12 +150,14 @@ $wpdb->insert( $table_name, array(
                     <div>
                         <div class="DHN-info">
                             <small>Số lượng</small>
-                            <b>0</b>  
+                            <b id="totalCountQuickOrder">
+                            <?php echo $totalCount; ?>
+                            </b>  
                         </div>
                         <div class="DHN-info-2">
                             <small>Tổng tiền</small>
                             <div>
-                                <b>0</b>
+                                <b id="totalPriceQuickOrder"><?php echo number_format($totalPrice, 0, ',', '.');?></b>
                                 <b class="DHN-unit">đ</b>
                             </div>
                         </div>
@@ -184,31 +171,4 @@ $wpdb->insert( $table_name, array(
 
 
 </div>
-
-
-
-
-<script>
-    function myFunction() {
-        
-		var data = {
-		'action': 'load_posts_by_ajax',
-		'username': 'lelamhai',
-        'password': '123456',
-		'email' : 'haile@aaa.vom',
-        'phone': '123456',
-		'security': '<?php echo wp_create_nonce("load_more_posts_policy"); ?>'
-		};
-
-		$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
-            console.log('finish');
-            // page++;
-            // var $res = JSON.parse(response);
-            // $('#row-more').append($res.datas);
-            // if($res.status==2){
-            //     $(".wrap-more").css("display", "none");
-            // }
-		});
-    }
-</script>
 <?php get_footer(); ?>

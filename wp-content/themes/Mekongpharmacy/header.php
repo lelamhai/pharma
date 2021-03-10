@@ -1,4 +1,6 @@
 <?php
+	global $wpdb;
+	$table_name = $wpdb->prefix . "quick_order";
 
  if($_POST['username'] !="" && $_POST['password'] != "")
  {
@@ -112,7 +114,7 @@
 								</div>
 							</div>
 							<div class="col-4">
-                  <input type="hide" id="userId" value="<?php echo $_COOKIE["idUser"];?>">
+                  <input type="hidden" id="userId" value="<?php echo $_COOKIE["idUser"];?>">
                 <?php
                  if($_COOKIE["username"] != null && $_COOKIE["password"] != null)
                   {

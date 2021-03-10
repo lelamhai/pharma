@@ -148,45 +148,100 @@ var currentdate = new Date();
 $( ".buttonMinus").click(function() {
     var productId = $(this).data("product");
 	var idUser = $('#userId').val();
-    var value = parseInt($('#value-'+productId).val());
-    if(value > 0)
+	var productPrice = $('#price-'+productId).val();
+	var countBegin = 0;
+    var count = parseInt($('#value-'+productId).val());
+	countBegin = count;
+    if(count > 0)
     {
-        value = value - 1;
-        $('#value-'+productId).val(value);
+        count = count - 1;
+        $('#value-'+productId).val(count);
     }
 	var data = {
 			'action': 'load_posts_by_ajax',
 			'userId': idUser,
 			'productId': productId,
-			'productCount': value,
+			'productCount': count,
+			'productPrice': productPrice,
 			'productDate': currentdate,
 			'security': '<?php echo wp_create_nonce("load_more_posts_policy"); ?>'
 	};
 
 	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
-		console.log(response);
+		
 	});
+
+	
+	$totalCount = $("#totalCountQuickOrder").text().trim();
+	$totalCount = parseInt($totalCount) + (count - countBegin);
+	$("#totalCountQuickOrder").text($totalCount);
+
+	
+	$totalPrice = $("#totalPriceQuickOrder").text().trim();
+	$totalPrice = $totalPrice.replaceAll('.','');
+
+	$totalPrice = parseInt($totalPrice);
+
+	$distanceCount = count - countBegin;
+	$itemPrice = productPrice * $distanceCount;
+
+	$totalPrice += $itemPrice;
+
+	
+	$totalPrice = $totalPrice.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+	$("#totalPriceQuickOrder").text($totalPrice);
 });
 
 $( ".buttonAdd").click(function() {
-    var productId = $(this).data("product");
+	var productId = $(this).data("product");
 	var idUser = $('#userId').val();
-    var value = parseInt($('#value-'+productId).val())
-    value = value + 1;
-	$('#value-'+productId).val(value);
-    
+	var productPrice = $('#price-'+productId).val();
+
+	console.log("========productPrice: " + productPrice);
+
+	var countBegin = 0;
+    var count = parseInt($('#value-'+productId).val());
+	
+	countBegin = count;
+
+	console.log("========countBegin: " + countBegin);
+
+    count = count + 1;
+	$('#value-'+productId).val(count);
 	var data = {
 			'action': 'load_posts_by_ajax',
 			'userId': idUser,
 			'productId': productId,
-			'productCount': value,
+			'productCount': count,
+			'productPrice': productPrice,
 			'productDate': currentdate,
 			'security': '<?php echo wp_create_nonce("load_more_posts_policy"); ?>'
 	};
 
+
 	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
-		console.log(response);
+
 	});
+
+	
+	$totalCount = $("#totalCountQuickOrder").text().trim();
+	$totalCount = parseInt($totalCount) + (count - countBegin);
+	$("#totalCountQuickOrder").text($totalCount);
+
+	
+	$totalPrice = $("#totalPriceQuickOrder").text().trim();
+	$totalPrice = $totalPrice.replaceAll('.','');
+
+	$totalPrice = parseInt($totalPrice);
+
+	$distanceCount = count - countBegin;
+	$itemPrice = productPrice * $distanceCount;
+
+	$totalPrice += $itemPrice;
+
+	
+	$totalPrice = $totalPrice.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+	$("#totalPriceQuickOrder").text($totalPrice);
 });
 
 
