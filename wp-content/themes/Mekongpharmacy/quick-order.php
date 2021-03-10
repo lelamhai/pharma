@@ -169,7 +169,7 @@ for($i=0; $i < count($data); $i++)
                         </div>
                     </div>
                     <div class="DHN-btn-check">
-                        <a href="Cart.html">Xem giỏ hàng</a>
+                        <a href="<?php echo get_home_url().'\gio-hang-dat-nhanh'?>">Xem giỏ hàng</a>
                     </div>                       
                 </div>
             </div>
