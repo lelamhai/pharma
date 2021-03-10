@@ -14,58 +14,35 @@
                     <div class="GH-left">
                         <div class="GH-instruction">
                             <i class="fas fa-star"></i>
-                            <p>Nhấp để đánh dấu sản phẩm quan trọng (giới hạn 20% tổng số sản phẩm, 1 sản phẩm đặt nhiều cái cũng tính là 1)
-                            </p>
+                            <p>Nhấp để đánh dấu sản phẩm quan trọng.</p>
                         </div>
                         <div class="GH-products">
                             <div></div>
                             <div class="GH-list-item">
-                                <div class="GH-list-item-row">
-                                    <div class="GH-star-circle">
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="GH-sample-img">                                 
-                                        <img src="img/panadol.jpg" alt="panadol">
-                                    </div>
-                                    <div class="GH-information">
-                                        <div class="GH-name">
-                                            <a title="Panadol extra gsk (h/180v)" href="#">Panadol extra gsk (h/180v)</a>
-                                        </div>
-                                        <div class="GH-capacity">
-                                            <small>Hộp 15 vỉ x 12 viên</small>
-                                        </div>
-                                    </div>
-                                                                        
-                                    <div class="GH-information2">
-                                        <div class="GH-price">
-                                            <span class="GH-number">234.400</span>
-                                            <span class="GH-unit">đ</span>
-                                        </div>
-                                        <div class="GH-quantity">
-                                            <button class="GH-minus" data-operation="-" data-target="qty.qtyBtn">
-                                                <i class="fas fa-minus-circle"></i>
-                                            </button>
-                                            <input class="GH-number" type="text" placeholder="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-                                            <button class="GH-plus" data-operation="+" data-target="qty.qtyBtn">
-                                                <i class="fas fa-plus-circle"></i>
-                                            </button>
-                                            <button class="GH-trash">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
+
+
+
+                <?php
+                    global $wpdb;
+                    $table_name = $wpdb->prefix . "quick_order";
+                    $data = $wpdb->get_results( 'SELECT * FROM '.$table_name.' WHERE UserId = '.$_COOKIE['idUser'].' AND ProductCount > 0');
+                    for($i=0; $i < count($data); $i++)
+                    {
+                        $totalCount = $totalCount + $data[$i] -> ProductCount;
+                        $totalPrice = $totalPrice + ($data[$i] -> ProductPrice *  $data[$i] -> ProductCount);
+
+                        ?>
+                        
                                 <div class="GH-list-item-row">
                                     <div class="GH-star-circle">
                                         <i class="fas fa-star"></i>
                                     </div>
                                     <div class="GH-sample-img">
-                                        <img src="img/panadol.jpg" alt="panadol">
+                                        <?php echo get_the_post_thumbnail( $data[$i] -> ProductId, 'full');?>
                                     </div>
                                     <div class="GH-information">
                                         <div class="GH-name">
-                                            <a title="Panadol extra gsk (h/180v)" href="#">Solgar B-Complex "50" Vegetable Capsules (C/50v)</a>
+                                            <a title="Panadol extra gsk (h/180v)" href="#"><?php echo get_the_title($data[$i] -> ProductId)?></a>
                                         </div>
                                         <div class="GH-capacity">
                                             <small>Hộp 15 vỉ x 12 viên</small>
@@ -74,17 +51,37 @@
                                                                         
                                     <div class="GH-information2">
                                         <div class="GH-price">
-                                            <span class="GH-number">234.400</span>
+                                            <span class="GH-number">
+                                                <?php 
+                                                    $value = get_field( "_sale_price", $data[$i] -> ProductId );
+                                                    if($value == null)
+                                                    {
+                                                        $value = get_field( "_regular_price", $data[$i] -> ProductId );
+                                                    }
+                                                    echo number_format($value, 0, ',', '.');
+                                                ?>    
+                                            </span>
                                             <span class="GH-unit">đ</span>
                                         </div>
                                         <div class="GH-quantity">
-                                            <button class="GH-minus" data-operation="-" data-target="qty.qtyBtn">
-                                                <i class="fas fa-minus-circle"></i>
-                                            </button>
-                                            <input class="GH-number" type="text" placeholder="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'></input>
-                                            <button class="GH-plus" data-operation="+" data-target="qty.qtyBtn">
-                                                <i class="fas fa-plus-circle"></i>
-                                            </button>
+                                            <button class="GH-minus buttonMinus" data-product="<?php echo $data[$i] -> ProductId?>">
+                                                    <i class="fas fa-minus-circle"></i>
+                                                </button>
+                                                <input type="hidden" id="price-<?php echo$data[$i] -> ProductId;?>"  value="<?php echo $value;?>">
+                                            <input id="value-<?php echo $data[$i] -> ProductId;?>" class="GH-number" type="text"  value=<?php 
+                                                    $key_1_value = get_post_meta($_COOKIE["idUser"],  $data[$i] -> ProductId , true );
+                                                    if ( ! empty( $key_1_value ) ) {
+                                                        echo $key_1_value;
+                                                    } else {
+                                                        echo 0;
+                                                    }
+                                                        ?>>
+                                            </input>
+
+                                            <button class="GH-plus buttonAdd" data-product="<?php echo $data[$i] -> ProductId?>">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                </button>
+                                         
                                             <button class="GH-trash">
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -92,13 +89,20 @@
                                     </div>
                                     
                                 </div>
+                        
+                        <?php
+                    }
+                ?>
+
+
+                                
                             </div>
                         </div>
-                        <div class="GH-note">                            
+                        <!-- <div class="GH-note">                            
                                 <i class="fas fa-exclamation-circle mr-1"></i>
                                 Để thêm sản phẩm vào giỏ hàng, vui lòng quay về trang
                                 <a href="Quick_order.html">Đặt hàng nhanh</a>                            
-                        </div>
+                        </div> -->
                         <div class="GH-note-2">
                             <h4 class="GH-note-2-tittle">Ghi chú khác</h4>
                             <h4>Trường hợp không tìm được thuốc mong muốn, Quý khách vui lòng điền yêu cầu bên dưới. Chúng tôi sẽ liên hệ mua thuốc và báo giá sớm nhất có thể.</h4>
@@ -113,12 +117,14 @@
                             <div>
                                 <div class="GH-info">
                                     <small>Số lượng</small>
-                                    <b>0</b>  
+                                    <b id="totalCountQuickOrder">
+                                        <?php echo $totalCount; ?>
+                                    </b>  
                                 </div>
                                 <div class="GH-info-2">
                                     <small>Tổng tiền</small>
                                     <div>
-                                        <b>0</b>
+                                        <b id="totalPriceQuickOrder"><?php echo number_format($totalPrice, 0, ',', '.');?></b>
                                         <b class="GH-unit">đ</b>
                                     </div>
                                 </div>
@@ -152,5 +158,5 @@
                     </div>
                 </div>
             </div>           
-        </
+</div>
 <?php get_footer(); ?>
