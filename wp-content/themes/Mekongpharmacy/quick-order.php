@@ -25,8 +25,13 @@ for($i=0; $i < count($data); $i++)
                 <div class="DHN-quick-order">
                     <div class="DHN-search-box">
                         <div class="DHN-input-box">
-                            <i class="fas fa-search"></i>
-                            <input class="DHN-input-search", placeholder="Nhập tên thuốc, hoạt chất cần tìm...">
+                            
+                            <form action=""method="GET">
+                                <i class="fas fa-search"></i>
+                                <input class="DHN-input-search" name="search" placeholder="Nhập tên thuốc, hoạt chất cần tìm...">
+                            </form>
+
+                            
                             <div class="DHN-kart-2nd">
                                 <div>
                                     <div class="DHN-info">
@@ -52,6 +57,7 @@ for($i=0; $i < count($data); $i++)
                     <?php
                     $args = array(
                         'post_type' => 'product',
+                        's' => $_GET["search"],
                         'posts_per_page' => 10
                     ); 
                     $the_query = new WP_Query( $args );

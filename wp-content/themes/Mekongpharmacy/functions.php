@@ -156,6 +156,9 @@ function namlbn_styles(){
 	wp_register_style( $handle = 'popup', $src = get_template_directory_uri().'/assets/css/quick-order/popup.css', $deps = array(), $ver = false, $media = 'all' );
 	wp_enqueue_style('popup');
 
+	wp_register_style( $handle = 'shoppingcart', $src = get_template_directory_uri().'/assets/css/quick-order/cart.css', $deps = array(), $ver = false, $media = 'all' );
+	wp_enqueue_style('shoppingcart');
+
 
 
 }
