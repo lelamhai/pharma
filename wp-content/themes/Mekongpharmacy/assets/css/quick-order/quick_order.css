@@ -23,7 +23,7 @@
 
 /* ------------------------------------ */
 .DHN-quick-order-and-kart{
-    background-color: #f4f7fc;
+    background-color: white;
     border-radius: 10px;
     display: flex;
 }
@@ -82,7 +82,7 @@
     z-index: 101;
 
     position: absolute;  
-    top: 31px;
+    top: 33px;
     left: 31px;
 
     color: #00b46e;
@@ -99,6 +99,7 @@
 
 .DHN-list-item-row{
     width: 100%;
+    min-height: 100px;
     align-items: center !important;
     display: flex;
     flex-wrap: wrap;
@@ -137,7 +138,7 @@
 }
 
 .DHN-name a{  
-    padding-left: 4px;
+    /* padding-left: 4px; */
     color: #343a40;
     font-weight: 550;
     text-decoration: none;
@@ -178,9 +179,19 @@
     background-color: #00b46e;
 }
 
+.DHN-tag-ban-chay i{
+
+    color: white;
+
+}
+
 .DHN-tag-hoa-don-nhanh, .DHN-tag-giao-nhanh {
     color: #00b46e;
     background-color: #f8f9fa;
+}
+
+.DHN-tag-hoa-don-nhanh i, .DHN-tag-giao-nhanh i{
+    color: #00b46e;
 }
 
     /* information 2 */
@@ -213,18 +224,28 @@
     text-align: left;
 }
 
+.DHN-new-price span{
+    color: #00b46e;
+}
+
+.DHN-old-price span del{
+    color: #919aa3;
+}
+
 .DHN-quantity{
-    height: 25px;
+    height: inherit;
     width: 100px;
     display: flex;
 }
-.DHN-quantity button{
+
+.DHN-list-item-row .DHN-information3 .DHN-quantity button{
     cursor: pointer;
     border: none;
     background-color: transparent;
     margin-top: 0px;
     font-family: inherit;
     outline: none;
+    padding: 0px 10px;
 }
 
 .DHN-quantity button i{
@@ -237,7 +258,7 @@
 }
 
 .DHN-quantity .DHN-number{
-    
+    margin-top: 10px;
     border: 1px solid #c3ccdc;
     border-radius: 5px;
     width: 40px;
@@ -254,7 +275,7 @@
 .DHN-minus i{
     color: #c3ccdc;
 }
-.DHN-plus{
+.DHN-plus i{
     color: #f9b514;
 }
 

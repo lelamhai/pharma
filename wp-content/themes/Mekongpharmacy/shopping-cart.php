@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Template name: Giỏ Hàng
  */
@@ -51,18 +51,29 @@
                                                                         
                                     <div class="GH-information2">
                                         <div class="GH-price">
-                                            <span class="GH-number">
-                                                <?php 
-                                                    $value = get_field( "_sale_price", $data[$i] -> ProductId );
-                                                    if($value == null)
-                                                    {
-                                                        $value = get_field( "_regular_price", $data[$i] -> ProductId );
-                                                    }
-                                                    echo number_format($value, 0, ',', '.');
-                                                ?>    
-                                            </span>
-                                            <span class="GH-unit">đ</span>
+						<div class="GH-new-price">
+                                            		<span class="GH-number">
+                                                		<?php 
+                                                    		$value = get_field( "_sale_price", $data[$i] -> ProductId );
+                                                    		if($value == null)
+                                                    		{
+                                                        		$value = get_field( "_regular_price", $data[$i] -> ProductId );
+                                                    		}
+                                                    			echo number_format($value, 0, ',', '.');
+                                                		?>    
+                                            		</span>
+                                            		<span class="GH-unit">đ</span>
+						</div>
+						<div class="GH-old-price">
+                                        		<span class="GH-number">
+                                            			<del>234.400</del>
+                                        		</span>
+                                        		<span class="GH-unit">
+                                            			<del>đ</del>
+                                        		</span>
+                                    		</div>   
                                         </div>
+
                                         <div class="GH-quantity">
                                             <button class="GH-minus buttonMinus" data-product="<?php echo $data[$i] -> ProductId?>">
                                                     <i class="fas fa-minus-circle"></i>
@@ -130,6 +141,9 @@
                                 </div>
                             </div>
                             <div class="GH-btn-check">
+				<div class="GH-text-danger">
+				Đây là tài khoản dùng thử. Giỏ hàng sẽ không thể lưu và thanh toán được. Xin bạn vui lòng tạo tài khoản cá nhân để sử dụng tính năng này! Cảm ơn!
+				</div>
                                 <a href="#">Tiếp tục thanh toán</a>
                             </div>
                                            

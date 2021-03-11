@@ -24,7 +24,7 @@
 
 /* ------------------------------------ */
 .GH-products-and-kart{
-    background-color: #f4f7fc;
+    background-color: white;
     width: 100%;
     /* border-radius: 10px; */
     display: flex;
@@ -45,7 +45,7 @@
 
 .GH-instruction, .GH-note, .GH-note-2{
     position: relative;
-    padding: 5px;
+    padding: 10px;
     margin-bottom: 24px;
     border-radius: 15px;
 }
@@ -57,12 +57,13 @@
 .GH-instruction p{
     text-indent: 25px;
     color: #919aa3;
+    margin-bottom: 0px;
 }
 
 .GH-instruction i{
     position: absolute;
-    top: 21px;
-    left: 20px;
+    top: 13px;
+    left: 17px;
     color: #ffc107;
 }
 
@@ -82,8 +83,8 @@
 }
 
 .GH-list-item-row{
-position: relative;
-
+    position: relative;
+    min-height: 100px;
     width: 100%;
     align-items: center;
     display: flex;
@@ -112,7 +113,7 @@ position: relative;
 
 .GH-star-circle{
     top: 35px;
-    left: -20px;
+    left: -18px;
 
     display: flex;
     justify-content: center;
@@ -178,7 +179,7 @@ position: relative;
 }
 
 .GH-price{
-    color: #00b46e;
+    /* color: #00b46e; */
     font-weight: 550;
     padding: 3px 5px 3px 5px;
     /* min-width: 90px;  */
@@ -186,18 +187,28 @@ position: relative;
     text-align: left;
 }
 
-.GH-quantity{
-    height: 25px;
+.GH-new-price span {
+    color: #00b46e;
+}
+
+.GH-old-price span del{
+    color: #919aa3;
+}
+
+.GH-list-item-row .GH-information2 .GH-quantity{
+    height: inherit;
     width: 35%;
     display: flex;
 }
-.GH-quantity button{
+.GH-list-item-row .GH-information2 .GH-quantity button{
     cursor: pointer;
     border: none;
     background-color: transparent;
     margin-top: 0px;
     font-family: inherit;
     outline: none;
+
+    padding: 0px 5px;
 }
 
 .GH-quantity button i{
@@ -210,6 +221,7 @@ position: relative;
 }
 
 .GH-quantity .GH-number{
+    margin-top: 10px;
     border: 1px solid;
     border-color: #c3ccdc;
     border-radius: 5px;
@@ -227,7 +239,8 @@ position: relative;
 .GH-minus i{
     color: #c3ccdc;
 }
-.GH-plus{
+
+.GH-quantity .GH-plus i {
     color: #f9b514;
 }
 
@@ -351,9 +364,9 @@ position: relative;
 }
 
 .GH-kart{
-    padding: 0px 10px;
+    /* padding: 0px 10px; */
     
-    height: 135px;
+    height: 40%;
     display: flex;
     flex-direction: column;
     border-radius: 10px;;
@@ -365,10 +378,20 @@ position: relative;
 }
 .GH-kart > div{
     width: 100%;
-    height: 55%;
+    height: 30%;
     display: flex;
     flex-direction: row;
 
+}
+
+.GH-kart .GH-btn-check{
+    flex-direction: column;
+}
+
+.GH-text-danger {
+    color: #dc3545 ;
+    margin-bottom: 0.5rem ;
+    text-align: left;
 }
 
 .GH-kart  div  div  b{
@@ -413,11 +436,12 @@ position: relative;
 .GH-kart .GH-btn-check{
     height: 45%;
     border-top: 1px solid rgb(195 204 220 / 40%);;
+    padding:  20px;
 }
 
 .GH-kart .GH-btn-check a{
     width: 90%;
-    height: 60%;
+    height: 55%;
     color: #212529;
     background-color: #f9b514;
     border-color: #f9b514;
@@ -426,7 +450,7 @@ position: relative;
     border-radius: 50px;
     text-align: center;
     padding-top: 10px;
-    margin-top: 12px;
+    margin-top: 10px;
     margin-left: 10px;
 
     font-weight: 550;
