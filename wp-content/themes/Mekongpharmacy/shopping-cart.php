@@ -33,7 +33,7 @@
 
                         ?>
                         
-                                <div class="GH-list-item-row">
+                                <div class="GH-list-item-row dataId-<?php echo $data[$i] -> ProductId;?>" >
                                     <div class="GH-star-circle">
                                         <i class="fas fa-star"></i>
                                     </div>
@@ -93,7 +93,7 @@
                                                     <i class="fas fa-plus-circle"></i>
                                                 </button>
                                          
-                                            <button class="GH-trash">
+                                            <button class="GH-trash GH-remove" data-id="<?php echo $data[$i] -> ProductId;?>">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </div>

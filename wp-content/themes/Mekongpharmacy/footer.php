@@ -243,9 +243,23 @@ $( ".buttonAdd").click(function() {
 	$totalPrice = $totalPrice.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 	$("#totalPriceQuickOrder").text($totalPrice);
 });
-
-
-
 </script>
+
+<script>
+$( ".GH-remove").click(function() {
+	var id = $(this).data("id");
+	$('.dataId-'+id).css('display','none');
+	var data = {
+		'action': 'remove_by_ajax',
+		'productId': id,
+		'security': '<?php echo wp_create_nonce("remove_item_policy"); ?>'
+	};
+
+	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
+	});
+});
+	
+</script>
+
 </body>
 </html>

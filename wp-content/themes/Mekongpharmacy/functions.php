@@ -369,31 +369,16 @@ function load_posts_by_ajax_callback() {
 	}
 }
 
-// ==== Total count, price ===\\
+// ==== remove item ===\\
 
-// add_action('wp_ajax_load_total_by_ajax', 'load_total_by_ajax_callback');
-// add_action('wp_ajax_nopriv_load_total_by_ajax', 'load_total_by_ajax_callback');
-// function load_total_by_ajax_callback() {
-//     check_ajax_referer('load_total_policy', 'security');
-// 	global $wpdb;
-// 	$table_name = $wpdb->prefix . "quick_order";
-// 	$userId = $_POST['userId'];
-
-// 	$data = $wpdb->get_results( 'SELECT * FROM '.$table_name.' WHERE UserId ='.$userId);
-// 	$totalCount = 0;
-// 	$totalPrice = 0;
-// 	for($i=0; $i < count($data); $i++)
-// 	{
-// 		$totalCount = $totalCount + $data[$i] -> ProductCount;
-// 		$totalPrice = $totalPrice + ($data[$i] -> ProductPrice *  $data[$i] -> ProductCount);
-// 	}
-
-// 	$array = array($totalCount, $totalCount);
-// 	echo $totalPrice;
-// }
-
-
-
-
+add_action('wp_ajax_remove_by_ajax', 'remove_by_ajax_callback');
+add_action('wp_ajax_nopriv_remove_by_ajax', 'remove_by_ajax_callback');
+function remove_by_ajax_callback() {
+    check_ajax_referer('remove_item_policy', 'security');
+	global $wpdb;
+	$table_name = $wpdb->prefix . "quick_order";
+	$productId = $_POST['productId'];
+	$wpdb->delete( $table_name, array( 'ProductId' => $productId ) );
+}
 
 ?>
