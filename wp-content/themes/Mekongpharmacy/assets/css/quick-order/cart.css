@@ -179,6 +179,8 @@
 }
 
 .GH-price{
+    display: flex;
+    flex-direction: row;
     /* color: #00b46e; */
     font-weight: 550;
     padding: 3px 5px 3px 5px;
@@ -189,6 +191,10 @@
 
 .GH-new-price span {
     color: #00b46e;
+}
+
+.GH-old-price span{
+    font-weight: 300;
 }
 
 .GH-old-price span del{
@@ -221,7 +227,7 @@
 }
 
 .GH-quantity .GH-number{
-    margin-top: 10px;
+    /* margin-top: 10px; */
     border: 1px solid;
     border-color: #c3ccdc;
     border-radius: 5px;
@@ -389,9 +395,10 @@
 }
 
 .GH-text-danger {
-    color: #dc3545 ;
-    margin-bottom: 0.5rem ;
+    color: #dc3545;
+    /* margin-bottom: 0.5rem; */
     text-align: left;
+    padding: 10px 20px;
 }
 
 .GH-kart  div  div  b{
@@ -414,9 +421,9 @@
     color: #f9b514;
 }
 
-.GH-kart .GH-info-2{
+.GH-right .GH-kart .GH-info-2 {
     width: 65%;
-    text-align: right;
+    text-align: center;
     display: flex;
     flex-direction: column;
 }
@@ -436,12 +443,12 @@
 .GH-kart .GH-btn-check{
     height: 45%;
     border-top: 1px solid rgb(195 204 220 / 40%);;
-    padding:  20px;
+    /* padding:  20px; */
 }
 
 .GH-kart .GH-btn-check a{
-    width: 90%;
-    height: 55%;
+    width: 92%;
+    height: 38%;
     color: #212529;
     background-color: #f9b514;
     border-color: #f9b514;
@@ -449,10 +456,10 @@
     text-decoration: none;
     border-radius: 50px;
     text-align: center;
-    padding-top: 10px;
-    margin-top: 10px;
+    padding: 10px 0px;
+    /* margin-top: 10px; */
     margin-left: 10px;
-
+    margin-right: 10px;
     font-weight: 550;
 }
 
@@ -666,6 +673,10 @@
         width: 35%;
     }
 
+    .GH-information2 {
+        width: 40%;
+    }
+
     .GH-note-2 .GH-btn-update-note {
         padding-left: 530px;
     }
@@ -686,11 +697,33 @@
         margin-bottom: 10px;
     }
 
+    .GH-kart .GH-btn-check a{
+        height: 38%;
+        margin-left: 12px;
+        margin-right: 10px;
+    }
+
 }
 
 @media screen and (max-width: 812px){
     .GH-note-2 .GH-btn-update-note {
         padding-left: 375px;
+    }
+
+    .GH-kart {
+        height: 75%;
+    }
+
+    .GH-kart .GH-info {
+        width: 45%;
+    }
+
+    .GH-kart .GH-btn-check a {
+        height: 30%;
+    }
+
+    .GH-quantity .GH-number {
+        margin-top: 10px;
     }
 }
 
@@ -782,18 +815,18 @@
     }
 
     .GH-kart .GH-btn-check {
-        height: 100px;
+        height: 250px;
         width: 100%;
         border-top:none;
     }
 
     .GH-kart .GH-btn-check a{
-        height: 75%;
-        line-height: 1.5;
+        height: 22%;
+        line-height: 1;
         font-size: 18px;
-
-        padding-top: 12px;
+        padding: 10px 0px;
         margin-left: 8px;
+        margin-top: 0px;
     }
 
     .GH-right a {
@@ -802,6 +835,17 @@
         margin-top: 20px;
     }
     
+    .GH-right .GH-kart .GH-info-2{
+        width: 100%;
+    }
+
+    .GH-price{
+        display: block;
+    }
+
+    .GH-quantity .GH-number{
+        margin-top: 9px;
+    }
 
 }
 
@@ -865,8 +909,10 @@
     }
 
     .GH-kart .GH-btn-check a{
+        height: 30%;
         margin-top: 21px;
         margin-left: 17px;
+        margin-bottom: 10px
     }
 }
 
@@ -935,15 +981,26 @@
     }
 
 
+    .GH-right .GH-kart .GH-info-2{
+        width: 100%;
+    }
+
     .GH-kart .GH-btn-check {
         display: flex;
         height: auto;
         align-content: center;
     }
 
+    .GH-text-danger {
+        padding: 5px 20px;
+    }
+
     .GH-kart .GH-btn-check a{
+        height: 30%;
         margin-top: 21px;
         margin-left: 17px;
+        margin-bottom: 10px
     }
 
 }
+
