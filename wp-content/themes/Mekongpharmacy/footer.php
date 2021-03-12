@@ -181,7 +181,6 @@ $( ".buttonMinus").click(function() {
 	
 	$totalPrice = $("#totalPriceQuickOrder").text().trim();
 	$totalPrice = $totalPrice.replaceAll('.','');
-
 	$totalPrice = parseInt($totalPrice);
 
 	$distanceCount = count - countBegin;
@@ -251,6 +250,22 @@ $( ".buttonAdd").click(function() {
 $( ".GH-remove").click(function() {
 	var id = $(this).data("id");
 	$('.dataId-'+id).css('display','none');
+
+	$count = $("#value-"+id).val();
+	$price = $("#price-"+id).val();
+
+	$totalCount = $("#totalCountQuickOrder").text().trim();
+	$totalCount = parseInt($totalCount) - $count ;
+	$("#totalCountQuickOrder").text($totalCount);
+
+	$totalPrice = $("#totalPriceQuickOrder").text().trim();
+	$totalPrice = $totalPrice.replaceAll('.','');
+	$totalPrice = parseInt($totalPrice);
+	$itemPrice = $count * $price;
+	$totalPrice -= $itemPrice;
+	$totalPrice = $totalPrice.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+	$("#totalPriceQuickOrder").text($totalPrice);
+	
 	var data = {
 		'action': 'remove_by_ajax',
 		'productId': id,

@@ -680,3 +680,9 @@
     }
 }
             /* iphone 5 */
+
+.not-found-quick-order {
+    text-align: center;
+    font-size: 26px;
+    padding: 30px;
+}

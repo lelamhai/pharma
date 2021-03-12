@@ -157,6 +157,7 @@ for($i=0; $i < count($data); $i++)
                             <?php
                         }
                     } else {
+                        echo "<div class='not-found-quick-order'>Tìm thấy sản phẩm có tên ".$_GET['search']. "</div>";
                     }
                     wp_reset_postdata();
                     ?>

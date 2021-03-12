@@ -380,6 +380,7 @@ function remove_by_ajax_callback() {
 	$table_name = $wpdb->prefix . "quick_order";
 	$productId = $_POST['productId'];
 	$wpdb->delete( $table_name, array( 'ProductId' => $productId ) );
+	update_post_meta($_COOKIE["idUser"], $productId, 0);
 }
 
 // ==== Favorite item ===\\

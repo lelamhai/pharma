@@ -137,20 +137,29 @@
                                 <div class="GH-info">
                                     <small>Số lượng</small>
                                     <b id="totalCountQuickOrder">
-                                        <?php echo $totalCount; ?>
+                                        <?php 
+                                            if($totalCount == "")
+                                            {
+                                                echo 0;
+                                            } else {
+                                                echo $totalCount;
+                                            }
+                                         ?>
                                     </b>  
                                 </div>
                                 <div class="GH-info-2">
                                     <small>Tổng tiền</small>
                                     <div>
-                                        <b id="totalPriceQuickOrder"><?php echo number_format($totalPrice, 0, ',', '.');?></b>
+                                        <b id="totalPriceQuickOrder"><?php 
+                                            echo number_format($totalPrice, 0, ',', '.');
+                                        ?></b>
                                         <b class="GH-unit">đ</b>
                                     </div>
                                 </div>
                             </div>
                             <div class="GH-btn-check">
 				<div class="GH-text-danger">
-				Đây là tài khoản dùng thử. Giỏ hàng sẽ không thể lưu và thanh toán được. Xin bạn vui lòng tạo tài khoản cá nhân để sử dụng tính năng này! Cảm ơn!
+				Tạm thời chưa thanh toán được vì tài khoản chưa được kích hoạt. Vui lòng liên hệ <span style="color:#00b46e">02873 008 840</span> để được kích hoạt
 				</div>
                                 <a href="#">Tiếp tục thanh toán</a>
                             </div>
