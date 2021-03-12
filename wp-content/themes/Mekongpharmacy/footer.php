@@ -288,5 +288,72 @@ $( ".favorite").click(function() {
 });
 </script>
 
+<script>
+	$flag = true;
+	$favorite = 1;
+$( ".favorite").click(function() {
+	if($(this).children("i:first").hasClass("yellow-star"))
+	{
+		console.log(0);
+		$(this).children("i:first").removeClass("yellow-star");
+		$favorite = 0;
+	} else {
+		$(this).children("i:first").addClass("yellow-star");
+		$favorite = 1;
+		console.log(1);
+	}
+
+	var id = $(this).data("star");
+	var data = {
+		'action': 'favorite_by_ajax',
+		'productId': id,
+		'productFavorite': $favorite,
+		'security': '<?php echo wp_create_nonce("favorite_item_policy"); ?>'
+	};
+
+	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
+	});
+});
+</script>
+
+
+<script>
+$( "#btn-submit-log").click(function() {
+	$userName = $("#email-s").val();
+	$password = $("#password-s").val();
+	var data = {
+		'action': 'login_by_ajax',
+		'userName': $userName,
+		'password': $password,
+		'security': '<?php echo wp_create_nonce("login_policy"); ?>'
+	};
+
+	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
+		var result = response.slice(0, -1);
+		var obj = jQuery.parseJSON(result);
+
+		if(obj.result == 1)
+		{
+			console.log(obj.result);
+			location.reload();
+		} else {
+			console.log("Tai khoang chua dung");
+		}
+	});
+});
+</script>
+
+<script>
+$( ".shopping-cart").click(function() {
+	$userId = $("#userId").val();
+	if($userId == "")
+	{
+		$('#modalLogin').modal('show');
+		return false;
+	}
+});
+</script>
+
+
 </body>
 </html>

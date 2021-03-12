@@ -402,4 +402,41 @@ function favorite_by_ajax_callback() {
 			)
 		);
 }
+// ==== Login ===\\
+add_action('wp_ajax_login_by_ajax', 'login_by_ajax_callback');
+add_action('wp_ajax_nopriv_login_by_ajax', 'login_by_ajax_callback');
+function login_by_ajax_callback() {
+    check_ajax_referer('login_policy', 'security');
+	global $wpdb;
+	$table_name = $wpdb->prefix . "quick_order";
+
+	$userName = $_POST['userName'];
+	$password = $_POST['password'];
+	
+	$user_data = array();
+    $user_data['user_login'] = $userName;
+    $user_data['user_password'] = $password;
+    $user_data['remember'] = true;
+
+	$user = wp_signon( $user_data, true );
+
+	if($user->user_login != null)
+	{
+		$cookie_name_Id = 'idUser';
+		$cookie_value_Id =  $user->ID;
+		setcookie($cookie_name_Id, $cookie_value_Id, time() + (86400), "/"); // 86400 = 1 day
+
+		$cookie_name = 'username';
+		$cookie_value =  $userName;
+		setcookie($cookie_name, $cookie_value, time() + (86400), "/"); // 86400 = 1 day
+
+		$cookie_password = 'password';
+		$cookie_password_value = $password;
+		setcookie($cookie_password, $cookie_password_value, time() + (86400), "/"); // 86400 = 1 day
+
+		echo '{"result": 1, "state": 1}';
+	} else {
+		echo '{"result": 0, "state": 1}';
+	}
+}
 ?>

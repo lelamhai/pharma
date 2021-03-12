@@ -1,39 +1,3 @@
-<?php
-	global $wpdb;
-	$table_name = $wpdb->prefix . "quick_order";
-
- if($_POST['username'] !="" && $_POST['password'] != "")
- {
-    $user_data = array();
-    // $user_data['user_login'] = "haile@aaa.vom";
-    $user_data['user_login'] = $_POST['username'];
-    $user_data['user_password'] = $_POST['password'];
-    $user_data['remember'] = true;
-    $user = wp_signon( $user_data, false );
-    if($user != null && $user != "")
-    {
-      $cookie_name_Id = 'idUser';
-      $cookie_value_Id =  $user->ID;
-      setcookie($cookie_name_Id, $cookie_value_Id, time() + (86400 * 30), "/"); // 86400 = 1 day
-
-      $cookie_name = 'username';
-      $cookie_value =  $_POST['username'];
-      setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-
-      $cookie_password = 'password';
-      $cookie_password_value =  $_POST['password'];
-      setcookie($cookie_password, $cookie_password_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-
-
-      if($_COOKIE["username"] != null && $_COOKIE["password"] != null)
-      {
-        wp_redirect(home_url()."/dat-hang-nhanh");
-      }
-    }
- }
- ?>
-
-
 <!DOCTYPE html>
 <!--[if IE 8]> <html <?php language_attributes(); ?> class="ie8"> <![endif]-->
 <!--[if !IE]> <html <?php language_attributes(); ?>> <![endif]-->
@@ -275,7 +239,7 @@
           </div>
           <div class="modal-body">
             <div class="form-acc">
-              <form action="#" id="myform-s" method="POST">
+              <!-- <form action="#" id="myform-s" method="POST"> -->
                 <div class="item-form">
                   <i class="fas fa-envelope"></i>
                   <input name="username" id="email-s" placeholder="Nhập email" />
