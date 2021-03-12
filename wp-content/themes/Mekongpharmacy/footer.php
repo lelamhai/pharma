@@ -142,7 +142,9 @@
 <!-- <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/quick-order.js"></script>
+
 <script>
 var currentdate = new Date();
 $( ".buttonMinus").click(function() {
@@ -266,34 +268,6 @@ $( ".GH-remove").click(function() {
 $( ".favorite").click(function() {
 	if($(this).children("i:first").hasClass("yellow-star"))
 	{
-		$(this).children("i:first").removeClass("yellow-star");
-		$favorite = 0;
-		console.log(0);
-	} else {
-		$(this).children("i:first").addClass("yellow-star");
-		$favorite = 1;
-		console.log(1);
-	}
-
-	var id = $(this).data("star");
-	var data = {
-		'action': 'favorite_by_ajax',
-		'productId': id,
-		'productFavorite': $favorite,
-		'security': '<?php echo wp_create_nonce("favorite_item_policy"); ?>'
-	};
-
-	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
-	});
-});
-</script>
-
-<script>
-	$flag = true;
-	$favorite = 1;
-$( ".favorite").click(function() {
-	if($(this).children("i:first").hasClass("yellow-star"))
-	{
 		console.log(0);
 		$(this).children("i:first").removeClass("yellow-star");
 		$favorite = 0;
@@ -315,7 +289,6 @@ $( ".favorite").click(function() {
 	});
 });
 </script>
-
 
 <script>
 $( "#btn-submit-log").click(function() {
