@@ -258,7 +258,34 @@ $( ".GH-remove").click(function() {
 	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
 	});
 });
-	
+</script>
+
+<script>
+	$flag = true;
+	$favorite = 1;
+$( ".favorite").click(function() {
+	if($(this).children("i:first").hasClass("yellow-star"))
+	{
+		$(this).children("i:first").removeClass("yellow-star");
+		$favorite = 0;
+		console.log(0);
+	} else {
+		$(this).children("i:first").addClass("yellow-star");
+		$favorite = 1;
+		console.log(1);
+	}
+
+	var id = $(this).data("star");
+	var data = {
+		'action': 'favorite_by_ajax',
+		'productId': id,
+		'productFavorite': $favorite,
+		'security': '<?php echo wp_create_nonce("favorite_item_policy"); ?>'
+	};
+
+	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
+	});
+});
 </script>
 
 </body>

@@ -5,12 +5,12 @@
 ?>
 
 <?php get_header(); ?>
-<div class="GH-container">
+<div class="DHN-container">
             <div class="GH-products-and-kart">
                 <div class="GH-tittle">
                     <h1>Giỏ hàng</h1>
                 </div>
-                <div class="GH-content">
+                <div class="GH-content ">
                     <div class="GH-left">
                         <div class="GH-instruction">
                             <i class="fas fa-star"></i>
@@ -34,8 +34,16 @@
                         ?>
                         
                                 <div class="GH-list-item-row dataId-<?php echo $data[$i] -> ProductId;?>" >
-                                    <div class="GH-star-circle">
-                                        <i class="fas fa-star"></i>
+                                    <div class="GH-star-circle favorite" data-star="<?php echo $data[$i] -> ProductId; ?>">
+                                        <?php
+                                            if($data[$i]->ProductFavorite)
+                                            {
+                                                ?><i class="fas fa-star yellow-star"></i><?php
+                                            } else {
+                                                ?><i class="fas fa-star"></i><?php
+                                            }
+                                        ?>
+                                        
                                     </div>
                                     <div class="GH-sample-img">
                                         <?php echo get_the_post_thumbnail( $data[$i] -> ProductId, 'full');?>

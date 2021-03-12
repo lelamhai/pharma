@@ -132,9 +132,14 @@
     color: #919aa3;
 }
 
-.GH-star-circle i:hover{
+/* .GH-star-circle i:hover{
     color: #ffc107;
+} */
+
+.yellow-star {
+    color: #ffc107 !important;
 }
+
 
 
 .GH-sample-img img{

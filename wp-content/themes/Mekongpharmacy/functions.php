@@ -320,6 +320,7 @@ function process_post() {
 	ProductName text,
 	ProductCount int,
 	ProductPrice int,
+	ProductFavorite tinyint DEFAULT 0 NOT NULL,
 	ProductDate datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 	UserId int
 	) $charset_collate;";
@@ -381,4 +382,24 @@ function remove_by_ajax_callback() {
 	$wpdb->delete( $table_name, array( 'ProductId' => $productId ) );
 }
 
+// ==== Favorite item ===\\
+add_action('wp_ajax_favorite_by_ajax', 'favorite_by_ajax_callback');
+add_action('wp_ajax_nopriv_favorite_by_ajax', 'favorite_by_ajax_callback');
+function favorite_by_ajax_callback() {
+    check_ajax_referer('favorite_item_policy', 'security');
+	global $wpdb;
+	$table_name = $wpdb->prefix . "quick_order";
+	$productId = $_POST['productId'];
+	$productFavorite = $_POST['productFavorite'];
+	
+	$wpdb->update(
+		$table_name,
+			array( 
+				'ProductFavorite' => $productFavorite
+			),
+			array(
+				'ProductId' => $productId 
+			)
+		);
+}
 ?>
