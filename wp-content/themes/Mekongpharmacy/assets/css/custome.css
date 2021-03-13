@@ -3,6 +3,11 @@
     float: right;
 }
 
+.login-finish img {
+    width: 100px;
+    height: auto;
+}
+
 .button-signin button{
     padding: 0.375rem 0.75rem;
     color: #212529;

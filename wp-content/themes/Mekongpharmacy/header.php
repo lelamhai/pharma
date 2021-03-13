@@ -90,7 +90,7 @@
                     {
                       ?>
                           <div class="login-finish">
-                            Chào <?php echo $_COOKIE["username"];?>
+                            <img src="<?php echo get_bloginfo("template_directory"); ?>/assets/images/quick_order/icon_login.png" alt="">
                           </div>
 
                       <?php
