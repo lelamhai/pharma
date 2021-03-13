@@ -197,6 +197,8 @@ $( ".buttonMinus").click(function() {
 $( ".buttonAdd").click(function() {
 	var productId = $(this).data("product");
 	var idUser = $('#userId').val();
+	console.log("====" + idUser);
+
 	var productPrice = $('#price-'+productId).val();
 
 	console.log("========productPrice: " + productPrice);
@@ -342,6 +344,44 @@ $( ".shopping-cart").click(function() {
 	}
 });
 </script>
+
+
+<script>
+$( "#btn-submit-sign-up").click(function() {
+	$email = $("#email").val();
+	$password = $("#password").val();
+	$role = $("input[name='role']:checked").val();
+	$nickname = $("#name-user").val();
+	$phone = $("#phonenumber").val();
+	$description = $("#address").val();
+
+	var data = {
+		'action': 'signUp_by_ajax',
+		'userName': $email,
+		'password': $password,
+		'role' : $role,
+		'nickname': $nickname,
+		'phonenumber': $phone,
+		'description': $description,
+		'security': '<?php echo wp_create_nonce("signUp_policy"); ?>'
+	};
+
+	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
+		var result = response.slice(0, -1);
+		var obj = jQuery.parseJSON(result);
+
+		if(obj.result == 1)
+		{
+			location.reload();
+		} else {
+			console.log("Tai khoang chua dung");
+		}
+	});
+
+});
+</script>
+
+
 
 
 </body>

@@ -79,7 +79,24 @@
 							</div>
 							<div class="col-4">
                   <div class="wrap-button">
-                          <div class="button-signin">
+                  <input type="hidden" id="userId" value="<?php 
+                    if(isset($_COOKIE["idUser"]))
+                    {
+                      echo $_COOKIE["idUser"];
+                    }
+                  ?>">
+                  <?php
+                  if(isset($_COOKIE["username"]) && isset($_COOKIE["password"]))
+                    {
+                      ?>
+                          <div class="login-finish">
+                            Chào <?php echo $_COOKIE["username"];?>
+                          </div>
+
+                      <?php
+                    } else {
+                    ?>
+                    <div class="button-signin">
                             <button
                             type="button" 
                             class="btn btn-primary" 
@@ -103,36 +120,11 @@
                             </button>
                           </div>
                         </div>
- 
-<!--								<div class="wrap-button">
-									<div class="button-signin">
-										<button
-                    type="button" 
-                    class="btn btn-primary" 
-                    data-toggle="modal" 
-                    data-target="#modalLogin"
-                    >
-                      Đăng nhập
-                    </button>
-									</div>
+                    <?php
+                    }
 
-									<div class="button-registration">
-										<button
-                      type="button" 
-                      class="btn btn-primary" 
-                      data-toggle="modal" 
-                      data-target="#exampleModal"
-                    >
-                      Tạo tài khoản
-                    </button>
-									</div>
-								</div>
-								<div class="login-finish">
-                  Chào <?php echo $_COOKIE["username"];?>
-                </div> -->
-								<!-- <div class="contact">
-									<a href="tel:<?php the_field('sdt_chinh','option');?>"><i class="fas fa-phone-alt"></i>Hotline (miễn phí): <?php the_field('sdt_chinh','option');?></a>
-								</div> -->
+                  ?>
+                          
 							</div>
 						</div>
 					</div>
@@ -345,11 +337,11 @@
                   </label>
                   <div class="container-bnt">
                     <label for="a" class="contain-radio-bnt">
-                      <input type="radio" name="type-acc" id="a" checked />
+                      <input type="radio" class="role" name="role" value="1" checked />
                       <span>Người Tiêu Dùng</span>
                     </label>
                     <label for="b" class="contain-radio-bnt">
-                      <input type="radio" name="type-acc" id="b" />
+                      <input type="radio" class="role" name="role" value="0" />
                       <span>Nhà Thuốc</span>
                     </label>
                   </div>

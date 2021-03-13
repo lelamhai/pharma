@@ -158,9 +158,6 @@ function namlbn_styles(){
 
 	wp_register_style( $handle = 'shoppingcart', $src = get_template_directory_uri().'/assets/css/quick-order/cart.css', $deps = array(), $ver = false, $media = 'all' );
 	wp_enqueue_style('shoppingcart');
-
-
-
 }
 add_action( 'wp_enqueue_scripts', 'namlbn_styles' );
 
@@ -297,18 +294,30 @@ if( function_exists('acf_add_options_page') ) {
 // add theme options - close
 
 // --------- HaiLL ---------
-add_action( 'init', 'process_post' );
-function process_post() {
-     $wp_user_query = new WP_User_Query(array('role' => 'subscriber'));
-	 $users = $wp_user_query->get_results();
-	 if(!empty($users))
-	 {
-		foreach($users as $user)
-		{
-			add_user_meta($user->id,'lelamhai', 'abc', true);
-		}
-	 }
+function new_city_methods( $citymethods ) {
+    $citymethods['phone'] = 'Phone';
+	$citymethods['user'] = 'Role User';
+    return $citymethods;  
 }
+add_filter( 'user_contactmethods', 'new_city_methods', 10, 1 );
+function new_custom_user_table( $column_city ) {
+    $column_city['phone'] = 'Phone';
+	$column_city['user'] = 'Role User';
+    return $column_city;
+}
+add_filter( 'manage_users_columns', 'new_custom_user_table' );
+function new_custom_user_table_row( $value, $column_city, $user_id ) {
+    switch ($column_city) {
+        case 'phone' :
+            return get_the_author_meta( 'phone', $user_id );
+
+		case 'user' :
+			return get_the_author_meta( 'user', $user_id );
+        default:  
+    }
+    return $value;
+}
+add_filter( 'manage_users_custom_column', 'new_custom_user_table_row', 10, 3 );
 
 //====== Create table Products =====\
 	global $wpdb;
@@ -440,4 +449,90 @@ function login_by_ajax_callback() {
 		echo '{"result": 0, "state": 1}';
 	}
 }
+// ==== SignUp ===\\
+add_action('wp_ajax_signUp_by_ajax', 'signUp_by_ajax_callback');
+add_action('wp_ajax_nopriv_signUp_by_ajax', 'signUp_by_ajax_callback');
+function signUp_by_ajax_callback() {
+    check_ajax_referer('signUp_policy', 'security');
+	$userName = $_POST['userName'];
+	$password = $_POST['password'];
+	$role = $_POST['role'];
+	$nickname = $_POST['nickname'];
+	$phonenumber = $_POST['phonenumber'];
+	$description = $_POST['description'];
+
+	$data = array(
+		'user_login'           	=> $userName,
+		'user_pass'            	=> $password,
+		'role'					=> "subscriber",
+		'user'					=> $role,
+		'email'					=> $userName,
+		'phone'					=> $phonenumber,
+		'description'			=>  $description,
+		'show_admin_bar_front' => false
+	);
+	  
+	$user_id = wp_insert_user( $data );
+	if ( ! is_wp_error( $user_id ) ) {
+		$user_data = array();
+		$user_data['user_login'] = $userName;
+		$user_data['user_password'] = $password;
+		$user_data['remember'] = true;
+	
+		$user = wp_signon( $user_data, true );
+		if($user->user_login != null)
+		{
+			$cookie_name_Id = 'idUser';
+			$cookie_value_Id =  $user->ID;
+			setcookie($cookie_name_Id, $cookie_value_Id, time() + (86400), "/"); // 86400 = 1 day
+	
+			$cookie_name = 'username';
+			$cookie_value =  $userName;
+			setcookie($cookie_name, $cookie_value, time() + (86400), "/"); // 86400 = 1 day
+	
+			$cookie_password = 'password';
+			$cookie_password_value = $password;
+			setcookie($cookie_password, $cookie_password_value, time() + (86400), "/"); // 86400 = 1 day
+	
+			echo '{"result": 1, "state": 0}';
+		} else {
+			echo '{"result": 0, "state": 0}';
+		}
+	}
+}
+
+/**
+ * Perform automatic login.
+ */
+function wpdocs_custom_login() {
+
+	// $data = array(
+	// 	'user_login'           => 'lelamhai@gmail.com', // the user's login username.
+	// 	'user_pass'            => 'plaintextpw', // not necessary to hash password ( The plain-text user password ).
+	// 	'show_admin_bar_front' => false // display the Admin Bar for the user 'true' or 'false'
+	// );
+	  
+	// $user_id = wp_insert_user( $data );
+	  
+	// if ( ! is_wp_error( $user_id ) ) {
+		 
+	// 	echo "User ID : ". $user_id;
+	// }
+
+	// $user_data = array();
+    // $user_data['user_login'] = "lelamhai@gmail.com";
+    // $user_data['user_password'] = "plaintextpw";
+    // $user_data['remember'] = true;
+
+	// $user = wp_signon( $user_data, true );
+	// if ( is_wp_error( $user ) ) {
+    //     echo $user->get_error_message();
+    // }
+	// var_dump($user->user_login);
+}
+ 
+// Run before the headers and cookies are sent.
+add_action( 'after_setup_theme', 'wpdocs_custom_login' );
+
+
 ?>

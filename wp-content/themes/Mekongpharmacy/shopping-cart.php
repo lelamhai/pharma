@@ -26,90 +26,98 @@
                     global $wpdb;
                     $table_name = $wpdb->prefix . "quick_order";
                     $data = $wpdb->get_results( 'SELECT * FROM '.$table_name.' WHERE UserId = '.$_COOKIE['idUser'].' AND ProductCount > 0');
-                    for($i=0; $i < count($data); $i++)
-                    {
-                        $totalCount = $totalCount + $data[$i] -> ProductCount;
-                        $totalPrice = $totalPrice + ($data[$i] -> ProductPrice *  $data[$i] -> ProductCount);
 
-                        ?>
-                        
-                                <div class="GH-list-item-row dataId-<?php echo $data[$i] -> ProductId;?>" >
-                                    <div class="GH-star-circle favorite" data-star="<?php echo $data[$i] -> ProductId; ?>">
-                                        <?php
-                                            if($data[$i]->ProductFavorite)
-                                            {
-                                                ?><i class="fas fa-star yellow-star"></i><?php
-                                            } else {
-                                                ?><i class="fas fa-star"></i><?php
-                                            }
-                                        ?>
+                    if(count($data) > 0)
+                    {
+
+
+                        for($i=0; $i < count($data); $i++)
+                        {
+                            $totalCount = $totalCount + $data[$i] -> ProductCount;
+                            $totalPrice = $totalPrice + ($data[$i] -> ProductPrice *  $data[$i] -> ProductCount);
+
+                            ?>
+                            
+                                    <div class="GH-list-item-row dataId-<?php echo $data[$i] -> ProductId;?>" >
+                                        <div class="GH-star-circle favorite" data-star="<?php echo $data[$i] -> ProductId; ?>">
+                                            <?php
+                                                if($data[$i]->ProductFavorite)
+                                                {
+                                                    ?><i class="fas fa-star yellow-star"></i><?php
+                                                } else {
+                                                    ?><i class="fas fa-star"></i><?php
+                                                }
+                                            ?>
+                                            
+                                        </div>
+                                        <div class="GH-sample-img">
+                                            <?php echo get_the_post_thumbnail( $data[$i] -> ProductId, 'full');?>
+                                        </div>
+                                        <div class="GH-information">
+                                            <div class="GH-name">
+                                                <a title="Panadol extra gsk (h/180v)" href="#"><?php echo get_the_title($data[$i] -> ProductId)?></a>
+                                            </div>
+                                            <div class="GH-capacity">
+                                                <small>Hộp 15 vỉ x 12 viên</small>
+                                            </div>
+                                        </div>
+                                                                            
+                                        <div class="GH-information2">
+                                            <div class="GH-price">
+                            <div class="GH-new-price">
+                                                        <span class="GH-number">
+                                                            <?php 
+                                                                $value = get_field( "_sale_price", $data[$i] -> ProductId );
+                                                                if($value == null)
+                                                                {
+                                                                    $value = get_field( "_regular_price", $data[$i] -> ProductId );
+                                                                }
+                                                                    echo number_format($value, 0, ',', '.');
+                                                            ?>    
+                                                        </span>
+                                                        <span class="GH-unit">đ</span>
+                            </div>
+                            <div class="GH-old-price">
+                                                    <span class="GH-number">
+                                                            <del>234.400</del>
+                                                    </span>
+                                                    <span class="GH-unit">
+                                                            <del>đ</del>
+                                                    </span>
+                                                </div>   
+                                            </div>
+
+                                            <div class="GH-quantity">
+                                                <button class="GH-minus buttonMinus" data-product="<?php echo $data[$i] -> ProductId?>">
+                                                        <i class="fas fa-minus-circle"></i>
+                                                    </button>
+                                                    <input type="hidden" id="price-<?php echo$data[$i] -> ProductId;?>"  value="<?php echo $value;?>">
+                                                <input id="value-<?php echo $data[$i] -> ProductId;?>" class="GH-number" type="text"  value=<?php 
+                                                        $key_1_value = get_post_meta($_COOKIE["idUser"],  $data[$i] -> ProductId , true );
+                                                        if ( ! empty( $key_1_value ) ) {
+                                                            echo $key_1_value;
+                                                        } else {
+                                                            echo 0;
+                                                        }
+                                                            ?>>
+                                                </input>
+
+                                                <button class="GH-plus buttonAdd" data-product="<?php echo $data[$i] -> ProductId?>">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                    </button>
+                                            
+                                                <button class="GH-trash GH-remove" data-id="<?php echo $data[$i] -> ProductId;?>">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                         
                                     </div>
-                                    <div class="GH-sample-img">
-                                        <?php echo get_the_post_thumbnail( $data[$i] -> ProductId, 'full');?>
-                                    </div>
-                                    <div class="GH-information">
-                                        <div class="GH-name">
-                                            <a title="Panadol extra gsk (h/180v)" href="#"><?php echo get_the_title($data[$i] -> ProductId)?></a>
-                                        </div>
-                                        <div class="GH-capacity">
-                                            <small>Hộp 15 vỉ x 12 viên</small>
-                                        </div>
-                                    </div>
-                                                                        
-                                    <div class="GH-information2">
-                                        <div class="GH-price">
-						<div class="GH-new-price">
-                                            		<span class="GH-number">
-                                                		<?php 
-                                                    		$value = get_field( "_sale_price", $data[$i] -> ProductId );
-                                                    		if($value == null)
-                                                    		{
-                                                        		$value = get_field( "_regular_price", $data[$i] -> ProductId );
-                                                    		}
-                                                    			echo number_format($value, 0, ',', '.');
-                                                		?>    
-                                            		</span>
-                                            		<span class="GH-unit">đ</span>
-						</div>
-						<div class="GH-old-price">
-                                        		<span class="GH-number">
-                                            			<del>234.400</del>
-                                        		</span>
-                                        		<span class="GH-unit">
-                                            			<del>đ</del>
-                                        		</span>
-                                    		</div>   
-                                        </div>
-
-                                        <div class="GH-quantity">
-                                            <button class="GH-minus buttonMinus" data-product="<?php echo $data[$i] -> ProductId?>">
-                                                    <i class="fas fa-minus-circle"></i>
-                                                </button>
-                                                <input type="hidden" id="price-<?php echo$data[$i] -> ProductId;?>"  value="<?php echo $value;?>">
-                                            <input id="value-<?php echo $data[$i] -> ProductId;?>" class="GH-number" type="text"  value=<?php 
-                                                    $key_1_value = get_post_meta($_COOKIE["idUser"],  $data[$i] -> ProductId , true );
-                                                    if ( ! empty( $key_1_value ) ) {
-                                                        echo $key_1_value;
-                                                    } else {
-                                                        echo 0;
-                                                    }
-                                                        ?>>
-                                            </input>
-
-                                            <button class="GH-plus buttonAdd" data-product="<?php echo $data[$i] -> ProductId?>">
-                                                    <i class="fas fa-plus-circle"></i>
-                                                </button>
-                                         
-                                            <button class="GH-trash GH-remove" data-id="<?php echo $data[$i] -> ProductId;?>">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                        
-                        <?php
+                            
+                            <?php
+                        }
+                    } else {
+                        echo "<div class='not-found-quick-order'> Chưa có sản phẩm nào trong giỏ hàng </div>";
                     }
                 ?>
 
