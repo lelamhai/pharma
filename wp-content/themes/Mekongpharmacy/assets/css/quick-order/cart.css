@@ -659,9 +659,11 @@
         width: 100%;
     }
 
-    .GH-note-2 .GH-btn-update-note {
-        padding-left: 755px;
+    .GH-kart .GH-btn-check a {
+        margin-bottom: 10px;
+        height: auto;
     }
+
 }
 
 @media screen and (max-width: 1024px){
@@ -716,7 +718,7 @@
     }
 
     .GH-kart {
-        height: 50%;
+        height: auto;
     }
 
     .GH-kart .GH-info {
@@ -824,14 +826,14 @@
     }
 
     .GH-kart .GH-btn-check {
-        height: 250px;
+        height: auto;
         width: 100%;
         border-top:none;
     }
 
     .GH-kart .GH-btn-check a{
-        height: 22%;
-        line-height: 1;
+        /* height: 22%; */
+        /* line-height: 1; */
         font-size: 18px;
         padding: 10px 0px;
         margin-left: 8px;
