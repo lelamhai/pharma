@@ -143,6 +143,7 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/log.js"></script>
 <script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/quick-order.js"></script>
 
 <script>
