@@ -294,6 +294,180 @@ if( function_exists('acf_add_options_page') ) {
 // add theme options - close
 
 // --------- HaiLL ---------
+// ===== Manager order ===== \\
+
+function wpdocs_register_my_custom_menu_page(){
+    add_menu_page( 
+        __( 'Custom Menu Title', 'textdomain' ),
+        'Giỏ hàng',
+        'manage_options',
+        'custompage',
+        'my_custom_menu_page',
+        plugins_url( 'myplugin/images/icon.png' ),
+        6
+    ); 
+}
+add_action( 'admin_menu', 'wpdocs_register_my_custom_menu_page' );
+ 
+/**
+ * Display a custom menu page
+ */
+function my_custom_menu_page(){
+	?>
+	<style>
+			.row-header-cart {
+				display: flex;
+				padding: 15px 5px;
+				margin-bottom: 30px;
+				font-size: 16px;
+				font-weight: 600;
+			}
+
+			.row-item-cart {
+				display: flex;
+				margin-bottom: 40px;
+			}
+
+			.wrap-header-cart {
+				display: flex;
+				width: 80%;
+			}
+
+			.wrap-item-cart {
+				width: 80%;
+			}
+
+			.header-price-total-cart {
+				width: 10%;
+			}
+
+			.item-price-total-cart {
+				width: 10%;
+				
+			}
+
+			.header-user-cart {
+			}
+
+			
+
+			.item-user-cart {
+				
+			}
+
+			.header-item {
+				width: 18%;
+
+			}
+
+			.content-item {
+				display: inline-flex;
+				width: 100%;
+				margin-bottom: 15px;
+			}
+
+			.row-item-cart:nth-of-type(odd) {
+				background-color:#fff;
+			}
+				
+			.row-item-cart:nth-of-type(even) {
+				background-color:#F2F2F2;
+			}
+
+			.header-item {
+				text-align: center;
+			}
+
+
+		</style>
+		<div class="row-header-cart">
+			<div class="wrap-header-cart">
+				<div class="header-item">Thích</div>
+				<div class="header-item">Tên sản phẩm</div>
+				<div class="header-item">Số Lượng</div>
+				<div class="header-item">Ngày đặt</div>
+				<div class="header-item">Tiền</div>
+			</div>
+			<div class="header-price-total-cart">
+				Tổng tiền
+			</div>
+			<div class="header-user-cart">
+				User
+			</div>
+		</div>
+
+		
+	<?php
+	global $wpdb;
+	$table_name = $wpdb->prefix . "quick_order";
+	$users = get_users( array( 'role__in' => array( 'author', 'subscriber' ) ) );
+	foreach ( $users as $user ) {
+		$data = $wpdb->get_results( 'SELECT * FROM '.$table_name.' WHERE UserId ='.$user->ID.' AND ProductCount > 0');
+		$total = 0;
+		if(count($data) > 0)
+		{
+			$totalPrice = 0;
+			?>
+				<div class="row-item-cart">
+					<div class="wrap-item-cart">
+						<?php 
+							for($i = 0; $i < count($data); $i++)
+							{
+								$itemPrice = $data[$i]->ProductCount * $data[$i]->ProductPrice;
+								$totalPrice = $totalPrice + $itemPrice;
+								?>
+								<div class="content-item">
+									<div class="header-item">
+										<?php 
+											echo $data[$i]->ProductFavorite; 
+										?>
+									</div>
+									<div class="header-item">
+										<?php 
+										 	echo get_the_title($data[$i] -> ProductId)
+										?>
+									</div>
+									<div class="header-item">
+										<?php 
+											echo $data[$i]->ProductCount; 
+										?>
+									</div>
+									<div class="header-item">
+										<?php echo $data[$i]->ProductDate; ?>
+									</div>
+									<div class="header-item">									
+										<?php echo number_format($data[$i]->ProductPrice, 0, ',', '.');?>
+									</div>
+								</div>
+								<?php
+							}
+						?>
+						
+					</div>
+					<div class="item-price-total-cart">
+						<?php echo number_format($totalPrice, 0, ',', '.');?>
+					</div>
+					<div class="item-user-cart">
+						User
+					</div>
+				</div>
+
+			
+			<?php
+		}
+		?>
+		<?php
+	}
+    ?>
+	<!-- <main>
+      <div class="container">
+       
+      </div>
+    </main> -->
+	<?php
+}
+
+// ====== Column user =======\\
 function new_city_methods( $citymethods ) {
     $citymethods['phone'] = 'Phone';
 	$citymethods['user'] = 'Role User';
@@ -500,39 +674,5 @@ function signUp_by_ajax_callback() {
 		}
 	}
 }
-
-/**
- * Perform automatic login.
- */
-function wpdocs_custom_login() {
-
-	// $data = array(
-	// 	'user_login'           => 'lelamhai@gmail.com', // the user's login username.
-	// 	'user_pass'            => 'plaintextpw', // not necessary to hash password ( The plain-text user password ).
-	// 	'show_admin_bar_front' => false // display the Admin Bar for the user 'true' or 'false'
-	// );
-	  
-	// $user_id = wp_insert_user( $data );
-	  
-	// if ( ! is_wp_error( $user_id ) ) {
-		 
-	// 	echo "User ID : ". $user_id;
-	// }
-
-	// $user_data = array();
-    // $user_data['user_login'] = "lelamhai@gmail.com";
-    // $user_data['user_password'] = "plaintextpw";
-    // $user_data['remember'] = true;
-
-	// $user = wp_signon( $user_data, true );
-	// if ( is_wp_error( $user ) ) {
-    //     echo $user->get_error_message();
-    // }
-	// var_dump($user->user_login);
-}
- 
-// Run before the headers and cookies are sent.
-add_action( 'after_setup_theme', 'wpdocs_custom_login' );
-
 
 ?>
