@@ -105,30 +105,45 @@ for($i=0; $i < count($data); $i++)
                                         </div>
                                         <div class="DHN-information3">
                                             <div class="DHN-price">
-						<div class="DHN-new-price">
-                                           	     <span class="DHN-number">
-                                               	     	<?php 
-                                              	          	$value = get_field( "_sale_price", $post->ID );
-                                                        	if($value == null)
-                                                        	{
-                                                            	$value = get_field( "_regular_price", $post->ID );
-                                                        	}
-                                                        	echo number_format($value, 0, ',', '.');
-                                                    	?>
-                                                    	<input type="hidden" id="price-<?php echo $post->ID;?>"  value="<?php echo $value;?>">
-                                                      </span>
-                                               	      <span class="DHN-unit">đ</span>
-						</div>
+						                        <div class="DHN-new-price">
+                                                
+                                                <?php
+                                                    $value = get_field( "_sale_price", $post->ID );
+                                                    if($value != null)
+                                                    {
+                                                       ?>
+                                                        <span class="DHN-number">
+                                                            <?php 
+                                                                echo number_format($value, 0, ',', '.');
+                                                            ?>
+                                                            <input type="hidden" id="price-<?php echo $post->ID;?>"  value="<?php echo $value;?>">
+                                                        </span>
+                                                        <span class="DHN-unit">đ</span>
+                                                       <?php
+                                                    }
+                                                ?>
 
-						<div class="DHN-old-price">
-                                        		<span class="DHN-number">
-                                            		      <del>234.400</del>
-                                        		</span>
-                                        		<span class="DHN-unit">
-                                            		       <del>đ</del>
-                                        		</span>
-                                    		</div>   
-
+                                           	        
+						                        </div>
+                                                
+                                                <?php
+                                                    $value = get_field( "_regular_price", $post->ID );
+                                                    if($value != null)
+                                                    {
+                                                        ?>
+                                                            <div class="DHN-old-price">
+                                                                <span class="DHN-number">
+                                                                    <del><?php  echo number_format($value, 0, ',', '.'); ?></del>
+                                                                </span>
+                                                                <span class="DHN-unit">
+                                                                    <del>đ</del>
+                                                                </span>
+                                                            </div>   
+                                                        <?php
+                                                    }
+                                                ?>
+                                                
+						                        
                                             </div>
                                             <div class="DHN-quantity">
                                                 <button class="DHN-minus buttonMinus" data-product="<?php echo $post->ID?>">
@@ -157,7 +172,7 @@ for($i=0; $i < count($data); $i++)
                             <?php
                         }
                     } else {
-                        echo "<div class='not-found-quick-order'>Tìm thấy sản phẩm có tên ".$_GET['search']. "</div>";
+                        echo "<div class='not-found-quick-order'>Không tìm thấy sản phẩm có tên: ".$_GET['search']. "</div>";
                     }
                     wp_reset_postdata();
                     ?>
