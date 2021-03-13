@@ -462,7 +462,7 @@
     border-radius: 50px;
     text-align: center;
     padding: 10px 0px;
-    /* margin-top: 10px; */
+    margin-bottom: 20px;
     margin-left: 10px;
     margin-right: 10px;
     font-weight: 550;
@@ -664,6 +664,10 @@
         height: auto;
     }
 
+    .GH-kart > div{
+        height: auto;
+    }
+
 }
 
 @media screen and (max-width: 1024px){
@@ -710,6 +714,9 @@
         margin-right: 10px;
     }
 
+    .GH-kart > div{
+        height: auto;
+    }
 }
 
 @media screen and (max-width: 812px){
@@ -723,6 +730,10 @@
 
     .GH-kart .GH-info {
         width: 45%;
+    }
+
+    .GH-kart .GH-btn-check {
+        height: auto;
     }
 
     .GH-kart .GH-btn-check a {
