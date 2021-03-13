@@ -45,13 +45,13 @@ nav.form-sign-up {
   font-size: 20px;
 }
 
-.form-acc form {
+.form-acc {
   display: flex;
   flex-direction: column;
   padding-bottom: 30px;
 }
 
-form .item-form {
+.form-acc .item-form {
   width: 100%;
   padding: 10px 30px;
   position: relative;
@@ -171,6 +171,35 @@ label > input[type="radio"] {
 
 .go-log a:hover {
   color: #bc8505;
+}
+
+.contain-check-bnt{
+  max-width: unset;
+  width: 100%;
+}
+
+.forgot-pass{
+  display: block;
+  text-align: center;
+  padding-top: 25px;
+  color: #00b46e;
+  text-decoration: none;
+  background-color: transparent;
+  font-size: 13px;
+}
+
+.forgot-pass:hover{
+  color: #00683f;
+}
+
+.configure-log{
+  margin-top: 15px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.item-form > .special-i{
+  top: 34px;
 }
 
 /*=========================== Responsive======================== */

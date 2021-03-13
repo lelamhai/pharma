@@ -78,25 +78,14 @@
 								</div>
 							</div>
 							<div class="col-4">
-                  <input type="hidden" id="userId" value="<?php echo $_COOKIE["idUser"];?>">
-                <?php
-                 if($_COOKIE["username"] != null && $_COOKIE["password"] != null)
-                  {
-                    ?>
-                        <div class="login-finish">
-                          Chào <?php echo $_COOKIE["username"];?>
-                        </div>
-
-                    <?php
-                  } else {
-                    ?>
-                      <div class="wrap-button">
+                  <div class="wrap-button">
                           <div class="button-signin">
                             <button
                             type="button" 
                             class="btn btn-primary" 
                             data-toggle="modal" 
                             data-target="#modalLogin"
+                            data-backdrop="static"
                             >
                               Đăng nhập
                             </button>
@@ -108,14 +97,12 @@
                               class="btn btn-primary" 
                               data-toggle="modal" 
                               data-target="#exampleModal"
+                              data-backdrop="static"
                             >
                               Tạo tài khoản
                             </button>
                           </div>
                         </div>
-                    <?php
-                  }
-                ?>
  
 <!--								<div class="wrap-button">
 									<div class="button-signin">
@@ -232,6 +219,7 @@
                 data-dismiss="modal"
                 aria-label="Close"
                 id="close-popup"
+                
               >
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -275,10 +263,10 @@
                 <div class="item-form">
                   <button id="btn-submit-log">Đăng Nhập</button>
                 </div>
-                <p class="go-log">
+                <p class="go-log configure-log">
                   Để Nhận Ưu Đãi Hấp Dẫn,<a href="#"> Đăng Ký Thành Viên</a>.
                 </p>
-              </form>
+              <!-- </form> -->
             </div>
           </div>
         </div>
@@ -318,7 +306,7 @@
 		  
           <div class="modal-body">
             <div class="form-acc">
-              <form action="#" id="myform" method="POST">
+              <!-- <form action="#" id="myform" method="POST"> -->
                 <div class="item-form">
                   <p class="title-part">Thông tin tài khoản</p>
                 </div>
@@ -418,13 +406,13 @@
                     </span>
                   </label>
                 </div>
-                <p class="go-log">
+                <p class="go-log configure-log">
                   Nếu Bạn Có Tài Khoản,Vui Lòng <a href="#">Đăng Nhập</a>.
                 </p>
                 <div class="item-form">
                   <button id="btn-submit-sign-up">Tạo Tài Khoản</button>
                 </div>
-              </form>
+              <!-- </form> -->
             </div>
           </div>
         </div>
