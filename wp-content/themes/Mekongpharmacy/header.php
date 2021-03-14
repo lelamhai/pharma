@@ -240,7 +240,7 @@
                   ></i>
                 </div>
 
-                <div class="item-form">
+                <!-- <div class="item-form">
                   <label
                     for="check-remem"
                     id="container-check-bnt"
@@ -250,14 +250,14 @@
                     <span id="text-notify">Nhớ mật khẩu </span>
                     <a href="#" class="forgot-pass">Quên mật khẩu</a>
                   </label>
-                </div>
+                </div> -->
 
                 <div class="item-form">
                   <button id="btn-submit-log">Đăng Nhập</button>
                 </div>
-                <p class="go-log configure-log">
+                <!-- <p class="go-log configure-log">
                   Để Nhận Ưu Đãi Hấp Dẫn,<a href="#"> Đăng Ký Thành Viên</a>.
-                </p>
+                </p> -->
               <!-- </form> -->
             </div>
           </div>
@@ -380,7 +380,7 @@
                     id="address"
                   ></textarea>
                 </div>
-
+<!-- 
                 <div class="item-form">
                   <label
                     for="check-notify"
@@ -397,10 +397,10 @@
                       <a href="#" target="_blank">Điều khoản sử dụng</a>
                     </span>
                   </label>
-                </div>
-                <p class="go-log configure-log">
+                </div> -->
+                <!-- <p class="go-log configure-log">
                   Nếu Bạn Có Tài Khoản,Vui Lòng <a href="#">Đăng Nhập</a>.
-                </p>
+                </p> -->
                 <div class="item-form">
                   <button id="btn-submit-sign-up">Tạo Tài Khoản</button>
                 </div>

@@ -317,47 +317,57 @@ function my_custom_menu_page(){
 	<style>
 			.row-header-cart {
 				display: flex;
-				padding: 15px 5px;
-				margin-bottom: 30px;
+				padding-top: 30px;
+    			padding-bottom: 30px;
 				font-size: 16px;
 				font-weight: 600;
 			}
 
 			.row-item-cart {
 				display: flex;
-				margin-bottom: 40px;
+				padding-top: 30px;
+    			padding-bottom: 30px;
 			}
 
 			.wrap-header-cart {
 				display: flex;
-				width: 80%;
+				width: 70%;
 			}
 
 			.wrap-item-cart {
-				width: 80%;
+				width: 70%;
 			}
 
 			.header-price-total-cart {
 				width: 10%;
+				text-align: center;
 			}
 
 			.item-price-total-cart {
 				width: 10%;
-				
+				text-align: center;
 			}
 
 			.header-user-cart {
+				text-align: center;
+				width: 15%;
 			}
 
-			
-
 			.item-user-cart {
-				
+				width: 15%;
 			}
 
 			.header-item {
 				width: 18%;
+			}
 
+			.column-small {
+				width: 8%;
+			}
+
+			.column-big {
+				width: 50%;
+				text-align: initial !important;
 			}
 
 			.content-item {
@@ -366,33 +376,42 @@ function my_custom_menu_page(){
 				margin-bottom: 15px;
 			}
 
+			.row-item-cart {
+				font-size: 16px;
+			}
+
 			.row-item-cart:nth-of-type(odd) {
-				background-color:#fff;
+				background-color:#F2F2F2;
 			}
 				
 			.row-item-cart:nth-of-type(even) {
-				background-color:#F2F2F2;
+				background-color:#fff;
 			}
 
 			.header-item {
 				text-align: center;
 			}
 
+			.info-user-quick-order span {
+				font-weight: 550;
+				font-size: 17px;
+			}
+
 
 		</style>
 		<div class="row-header-cart">
 			<div class="wrap-header-cart">
-				<div class="header-item">Thích</div>
-				<div class="header-item">Tên sản phẩm</div>
-				<div class="header-item">Số Lượng</div>
+				<div class="header-item column-small">Thích</div>
+				<div class="header-item column-big">Tên sản phẩm</div>
+				<div class="header-item column-small">Số Lượng</div>
 				<div class="header-item">Ngày đặt</div>
-				<div class="header-item">Tiền</div>
+				<div class="header-item column-small">Tiền</div>
 			</div>
 			<div class="header-price-total-cart">
 				Tổng tiền
 			</div>
 			<div class="header-user-cart">
-				User
+				Thông tin KH
 			</div>
 		</div>
 
@@ -416,18 +435,18 @@ function my_custom_menu_page(){
 								$itemPrice = $data[$i]->ProductCount * $data[$i]->ProductPrice;
 								$totalPrice = $totalPrice + $itemPrice;
 								?>
-								<div class="content-item">
-									<div class="header-item">
+								<div class="content-item ">
+									<div class="header-item column-small">
 										<?php 
 											echo $data[$i]->ProductFavorite; 
 										?>
 									</div>
-									<div class="header-item">
+									<div class="header-item column-big">
 										<?php 
 										 	echo get_the_title($data[$i] -> ProductId)
 										?>
 									</div>
-									<div class="header-item">
+									<div class="header-item column-small">
 										<?php 
 											echo $data[$i]->ProductCount; 
 										?>
@@ -435,8 +454,8 @@ function my_custom_menu_page(){
 									<div class="header-item">
 										<?php echo $data[$i]->ProductDate; ?>
 									</div>
-									<div class="header-item">									
-										<?php echo number_format($data[$i]->ProductPrice, 0, ',', '.');?>
+									<div class="header-item column-small">									
+										<?php echo number_format($data[$i]->ProductPrice, 0, ',', '.');?> đ
 									</div>
 								</div>
 								<?php
@@ -445,10 +464,13 @@ function my_custom_menu_page(){
 						
 					</div>
 					<div class="item-price-total-cart">
-						<?php echo number_format($totalPrice, 0, ',', '.');?>
+						<?php echo number_format($totalPrice, 0, ',', '.');?> đ
 					</div>
 					<div class="item-user-cart">
-						User
+						<div class="info-user-quick-order">Tên: <span><?php echo $user->display_name;?></span></div>
+						<div class="info-user-quick-order">Số điện thoại: <span><?php echo $user->phone;?></span></div>
+						<div class="info-user-quick-order">Mail: <span><?php echo $user->user_login;?></span></div>
+						<div class="info-user-quick-order"><span><?php echo $user->description;?></span></div>
 					</div>
 				</div>
 
@@ -634,6 +656,7 @@ function signUp_by_ajax_callback() {
 		'role'					=> "subscriber",
 		'user'					=> $role,
 		'email'					=> $userName,
+		'display_name'			=> $nickname,
 		'phone'					=> $phonenumber,
 		'description'			=>  $description,
 		'show_admin_bar_front' => false

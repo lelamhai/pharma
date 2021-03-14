@@ -143,7 +143,7 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-<!-- <script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/log.js"></script> -->
+<script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/log.js"></script>
 <script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/quick-order.js"></script>
 
 <script>
@@ -197,19 +197,10 @@ $(document).on('click', ".buttonMinus", function() {
 $(document).on('click', ".buttonAdd", function() {
 	var productId = $(this).data("product");
 	var idUser = $('#userId').val();
-	console.log("====" + idUser);
-
 	var productPrice = $('#price-'+productId).val();
-
-	console.log("========productPrice: " + productPrice);
-
 	var countBegin = 0;
     var count = parseInt($('#value-'+productId).val());
-	
 	countBegin = count;
-
-	console.log("========countBegin: " + countBegin);
-
     count = count + 1;
 	$('#value-'+productId).val(count);
 	var data = {
@@ -222,28 +213,19 @@ $(document).on('click', ".buttonAdd", function() {
 			'security': '<?php echo wp_create_nonce("load_more_posts_policy"); ?>'
 	};
 
-
 	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
-
 	});
 
 	
 	$totalCount = $("#totalCountQuickOrder").text().trim();
 	$totalCount = parseInt($totalCount) + (count - countBegin);
 	$("#totalCountQuickOrder").text($totalCount);
-
-	
 	$totalPrice = $("#totalPriceQuickOrder").text().trim();
 	$totalPrice = $totalPrice.replaceAll('.','');
-
 	$totalPrice = parseInt($totalPrice);
-
 	$distanceCount = count - countBegin;
 	$itemPrice = productPrice * $distanceCount;
-
 	$totalPrice += $itemPrice;
-
-	
 	$totalPrice = $totalPrice.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 	$("#totalPriceQuickOrder").text($totalPrice);      
 });
@@ -329,7 +311,7 @@ $( "#btn-submit-log").click(function() {
 			console.log(obj.result);
 			location.reload();
 		} else {
-			console.log("Tai khoang chua dung");
+			alert("Tài khoản chưa đúng");
 		}
 	});
 });
@@ -375,7 +357,7 @@ $( "#btn-submit-sign-up").click(function() {
 		{
 			location.reload();
 		} else {
-			console.log("Tai khoang chua dung");
+			alert("Tài khoản chưa đúng");
 		}
 	});
 
@@ -396,7 +378,6 @@ $( "#button-quick-order").click(function() {
 		$('.DHN-list-item').append(response);
 		$page++;
 	});
-	
 });
 </script>
 
