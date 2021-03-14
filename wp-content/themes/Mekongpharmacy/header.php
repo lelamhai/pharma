@@ -91,6 +91,10 @@
                       ?>
                           <div class="login-finish">
                             <img src="<?php echo get_bloginfo("template_directory"); ?>/assets/images/quick_order/icon_login.png" alt="">
+                            <ul class="menu-account">
+                              <li>Thông tin tài khoản</li>
+                              <li id="logout-quick-order">Đăng xuất</li>
+                            </ul>
                           </div>
 
                       <?php
@@ -240,7 +244,7 @@
                   ></i>
                 </div>
 
-                <!-- <div class="item-form">
+                <div class="item-form">
                   <label
                     for="check-remem"
                     id="container-check-bnt"
@@ -250,7 +254,7 @@
                     <span id="text-notify">Nhớ mật khẩu </span>
                     <a href="#" class="forgot-pass">Quên mật khẩu</a>
                   </label>
-                </div> -->
+                </div>
 
                 <div class="item-form">
                   <button id="btn-submit-log">Đăng Nhập</button>
@@ -381,7 +385,7 @@
                     id="address"
                   ></textarea>
                 </div>
-<!-- 
+
                 <div class="item-form">
                   <label
                     for="check-notify"
@@ -398,10 +402,10 @@
                       <a href="#" target="_blank">Điều khoản sử dụng</a>
                     </span>
                   </label>
-                </div> -->
-                <!-- <p class="go-log configure-log">
+                </div> 
+                <p class="go-log configure-log">
                   Nếu Bạn Có Tài Khoản,Vui Lòng <a href="#">Đăng Nhập</a>.
-                </p> -->
+                </p>
                 <div class="item-form">
                   <button id="btn-submit-sign-up">Tạo Tài Khoản</button>
                 </div>

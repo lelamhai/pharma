@@ -4,7 +4,7 @@
 }
 
 .login-finish img {
-    width: 100px;
+    width: 36px;
     height: auto;
 }
 
@@ -30,4 +30,37 @@
     border-radius: 50px;
     border: none;
     color: #fff
+}
+
+.login-finish {
+    position: relative;
+}
+
+.login-finish:hover .menu-account {
+    display: block;
+}
+
+.menu-account {
+    width: 140px;
+    background-color: #3B953F;
+    position: absolute;
+    z-index: 1;
+    display: none;
+}
+
+.menu-account li {
+    list-style-type: none;
+    padding: 10px 5px;
+    color: #fff;;
+    cursor:pointer;
+    margin: 0;
+    text-align: center;
+}
+
+.menu-account li:first-child {
+    border-bottom: 1px solid rgba(195,204,220,0.4);
+}
+
+.menu-account li:hover {
+    background-color: #F0D44C;
 }

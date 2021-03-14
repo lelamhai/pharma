@@ -637,24 +637,6 @@ function login_by_ajax_callback() {
 	} else {
 		echo '{"result": 0, "state": 1}';
 	}
-	// if($user->user_login != null)
-	// {
-	// 	$cookie_name_Id = 'idUser';
-	// 	$cookie_value_Id =  $user->ID;
-	// 	setcookie($cookie_name_Id, $cookie_value_Id, time() + (86400), "/"); // 86400 = 1 day
-
-	// 	$cookie_name = 'username';
-	// 	$cookie_value =  $userName;
-	// 	setcookie($cookie_name, $cookie_value, time() + (86400), "/"); // 86400 = 1 day
-
-	// 	$cookie_password = 'password';
-	// 	$cookie_password_value = $password;
-	// 	setcookie($cookie_password, $cookie_password_value, time() + (86400), "/"); // 86400 = 1 day
-
-	// 	echo '{"result": 1, "state": 1}';
-	// } else {
-	// 	echo '{"result": 0, "state": 1}';
-	// }
 }
 // ==== SignUp ===\\
 add_action('wp_ajax_signUp_by_ajax', 'signUp_by_ajax_callback');
@@ -706,7 +688,29 @@ function signUp_by_ajax_callback() {
 		} else {
 			echo '{"result": 0, "state": 0}';
 		}
+	} else {
+		echo '{"result": 0, "state": 0}';
 	}
+}
+
+// ==== Logout ===\\
+add_action('wp_ajax_logout_by_ajax', 'logout_by_ajax_callback');
+add_action('wp_ajax_nopriv_logout_by_ajax', 'logout_by_ajax_callback');
+function logout_by_ajax_callback() {
+    check_ajax_referer('logout_policy', 'security');
+	wp_logout();
+	
+	$cookie_name_Id = 'idUser';
+	$cookie_value_Id =  -1;
+	setcookie($cookie_name_Id, $cookie_value_Id, time() - 3600, "/"); // 86400 = 1 day
+	
+	$cookie_name = 'username';
+	$cookie_value = "";
+	setcookie($cookie_name, $cookie_value, time() - 3600, "/"); // 86400 = 1 day
+	
+	$cookie_password = 'password';
+	$cookie_password_value = "";
+	setcookie($cookie_password, $cookie_password_value, time() - 3600, "/"); // 86400 = 1 day
 }
 
 

@@ -174,7 +174,7 @@
                                            
                         </div>
                         
-                            <a href="Quick_order.html">&lt;&lt; Tiếp tục đặt hàng</a>
+                            <a href="<?php ?>">&lt;&lt; Tiếp tục đặt hàng</a>
 
                     </div>
                     <div class="GH-popup">

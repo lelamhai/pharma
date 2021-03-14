@@ -143,7 +143,6 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-<!-- <script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/log.js"></script> -->
 <script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/quick-order.js"></script>
 
 <script>
@@ -232,6 +231,7 @@ $(document).on('click', ".buttonAdd", function() {
 
 </script>
 
+<!-- remove product -->
 <script>
 $( ".GH-remove").click(function() {
 	var id = $(this).data("id");
@@ -263,6 +263,7 @@ $( ".GH-remove").click(function() {
 });
 </script>
 
+<!-- favorite -->
 <script>
 	$flag = true;
 	$favorite = 1;
@@ -291,6 +292,7 @@ $( ".favorite").click(function() {
 });
 </script>
 
+<!-- Login -->
 <script>
 $(document).on('click', "#btn-submit-log", function() {
 	const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -355,18 +357,7 @@ $(document).on('click', "#btn-submit-log", function() {
 </script>
 
 
-
-<script>
-$( ".shopping-cart").click(function() {
-	$userId = $("#userId").val();
-	if($userId == "")
-	{
-		$('#modalLogin').modal('show');
-		return false;
-	}
-});
-</script>
-
+<!-- Sign Up -->
 <script>
 $(document).on('click', "#btn-submit-sign-up", function() {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -395,6 +386,7 @@ $(document).on('click', "#btn-submit-sign-up", function() {
 
 		$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
 			var result = response.slice(0, -1);
+			console.log(result);
 			var obj = jQuery.parseJSON(result);
 
 			if(obj.result == 1)
@@ -512,6 +504,34 @@ $(document).on('click', "#btn-submit-sign-up", function() {
 });
 </script>
 
+<!-- Logout -->
+<script>
+$(document).on('click', "#logout-quick-order", function() {
+    var data = {
+		'action': 'logout_by_ajax',
+		'security': '<?php echo wp_create_nonce("logout_policy"); ?>'
+	};
+
+	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
+		response = response.slice(0, -1);
+		location.reload();
+	});
+});
+</script>
+
+<!-- First Login click menu -->
+<script>
+$( ".shopping-cart").click(function() {
+	$userId = $("#userId").val();
+	if($userId == "")
+	{
+		$('#modalLogin').modal('show');
+		return false;
+	}
+});
+</script>
+
+<!-- Load more quick order -->
 <script>
 $page = 2;
 $( "#button-quick-order").click(function() {
@@ -528,7 +548,6 @@ $( "#button-quick-order").click(function() {
 	});
 });
 </script>
-
 
 </body>
 </html>
