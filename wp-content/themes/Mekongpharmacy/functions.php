@@ -632,11 +632,29 @@ function login_by_ajax_callback() {
 		$cookie_password = 'password';
 		$cookie_password_value = $password;
 		setcookie($cookie_password, $cookie_password_value, time() + (86400), "/"); // 86400 = 1 day
-
+		
 		echo '{"result": 1, "state": 1}';
 	} else {
 		echo '{"result": 0, "state": 1}';
 	}
+	// if($user->user_login != null)
+	// {
+	// 	$cookie_name_Id = 'idUser';
+	// 	$cookie_value_Id =  $user->ID;
+	// 	setcookie($cookie_name_Id, $cookie_value_Id, time() + (86400), "/"); // 86400 = 1 day
+
+	// 	$cookie_name = 'username';
+	// 	$cookie_value =  $userName;
+	// 	setcookie($cookie_name, $cookie_value, time() + (86400), "/"); // 86400 = 1 day
+
+	// 	$cookie_password = 'password';
+	// 	$cookie_password_value = $password;
+	// 	setcookie($cookie_password, $cookie_password_value, time() + (86400), "/"); // 86400 = 1 day
+
+	// 	echo '{"result": 1, "state": 1}';
+	// } else {
+	// 	echo '{"result": 0, "state": 1}';
+	// }
 }
 // ==== SignUp ===\\
 add_action('wp_ajax_signUp_by_ajax', 'signUp_by_ajax_callback');

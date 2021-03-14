@@ -293,29 +293,68 @@ $( ".favorite").click(function() {
 
 <script>
 $(document).on('click', "#btn-submit-log", function() {
-	$userName = $("#email-s").val();
-	$password = $("#password-s").val();
-	var data = {
+	const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regex_phone = /(0[3|5|7|8|9])+([0-9]{8})\b/g;
+
+	let email_check = $("#email-s").val();
+    let pass_check = $("#password-s").val();
+
+
+	if(email_check !== "" && email_check.match(re) && pass_check !=="" && pass_check.length > 5 && pass_check.length < 16 )
+	{
+		var data = {
 		'action': 'login_by_ajax',
-		'userName': $userName,
-		'password': $password,
+		'userName': email_check,
+		'password': pass_check,
 		'security': '<?php echo wp_create_nonce("login_policy"); ?>'
-	};
+		};
+		$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
+			var result = response.slice(0, -1);
+			var obj = jQuery.parseJSON(result);
 
-	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
-		var result = response.slice(0, -1);
-		var obj = jQuery.parseJSON(result);
+			if(obj.result == 1)
+			{
+				console.log(obj.result);
+				location.reload();
+			} else {
+				alert("Tài khoản chưa đúng!");
+			}
+		});
+	} else {
+		if(email_check === "")
+        {
+			$("#email-s").css("border", "1px solid red");
+			$("#email-s").css("background-color", "rgb(255, 177, 177)");
+			setTimeout(function () {
+				$("#email-s").css("border", "unset");
+				$("#email-s").css("background-color", "unset");
+			}, 3000);
+        }
 
-		if(obj.result == 1)
-		{
-			console.log(obj.result);
-			location.reload();
-		} else {
-			alert("Tài khoản chưa đúng");
-		}
-	});
+        if(!email_check.match(re))
+        {
+			$("#email-s").css("border", "1px solid red");
+			$("#email-s").css("background-color", "rgb(255, 177, 177)");
+			setTimeout(function () {
+				$("#email-s").css("border", "unset");
+				$("#email-s").css("background-color", "unset");
+			}, 3000);
+        }
+
+        if(pass_check === "")
+        {
+          $("#password-s").css("border", "1px solid red");
+          $("#password-s").css("background-color", "rgb(255, 177, 177)");
+          setTimeout(function () {
+            $("#password-s").css("border", "unset");
+            $("#password-s").css("background-color", "unset");
+          }, 3000);
+        }
+	}
 });
 </script>
+
+
 
 <script>
 $( ".shopping-cart").click(function() {
@@ -341,7 +380,7 @@ $(document).on('click', "#btn-submit-sign-up", function() {
     let name_user = $("#name-user").val();
     let address = $("#address").val();
 
-    if(email_check !== "" && email_check.match(re) && pass_check !=="" && pass_check.length > 5 && pass_check.length < 16&& repass_check !== "" && pass_check === repass_check && name_user!== "" && phone !== "" && address !== "")
+    if(email_check !== "" && email_check.match(re) && pass_check !=="" && pass_check.length > 5 && pass_check.length < 16 && repass_check !== "" && pass_check === repass_check && name_user!== "" && phone !== "" && address !== "")
     {
 		var data = {
 		'action': 'signUp_by_ajax',
@@ -362,7 +401,7 @@ $(document).on('click', "#btn-submit-sign-up", function() {
 			{
 				location.reload();
 			} else {
-				alert("Đăng ký tài khoản không đúng");
+				alert("Đăng ký tài khoản không đúng!");
 			}
 		});
     }  else {
@@ -471,29 +510,7 @@ $(document).on('click', "#btn-submit-sign-up", function() {
         }
     }
 });
-	
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script>
 $page = 2;

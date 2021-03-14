@@ -306,6 +306,7 @@ $(document).ready(function () {
 
     let email_check = $("#email-s").val();
     let pass_check = $("#password-s").val();
+    
     if (email_check === "" || !email_check.match(re)) {
       $("#email").css("border", "1px solid red");
       $("#email").css("background-color", "rgb(255, 177, 177)");
