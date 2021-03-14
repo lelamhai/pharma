@@ -124,7 +124,8 @@ label > input[type="radio"] {
   color: linear-gradient(102.04deg, #00b46e 0%, #9ac100 100%);
 }
 
-#btn-submit-log,#btn-submit-sign-up  {
+#btn-submit-log,
+#btn-submit-sign-up {
   background: linear-gradient(102.04deg, #00b46e 0%, #9ac100 100%);
   color: white;
   height: 50px;
@@ -173,12 +174,12 @@ label > input[type="radio"] {
   color: #bc8505;
 }
 
-.contain-check-bnt{
+.contain-check-bnt {
   max-width: unset;
   width: 100%;
 }
 
-.forgot-pass{
+.forgot-pass {
   display: block;
   text-align: center;
   padding-top: 25px;
@@ -188,18 +189,23 @@ label > input[type="radio"] {
   font-size: 13px;
 }
 
-.forgot-pass:hover{
+.forgot-pass:hover {
   color: #00683f;
 }
 
-.configure-log{
+.configure-log {
   margin-top: 15px;
   font-size: 13px;
   text-align: center;
 }
 
-.item-form > .special-i{
+.item-form > .special-i {
   top: 34px;
+}
+
+.right-form{
+  border: unset !important;
+  background-color:unset !important;
 }
 
 /*=========================== Responsive======================== */
@@ -224,16 +230,20 @@ label > input[type="radio"] {
     padding-bottom: 15px;
   }
 
-  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
     font-size: 14px;
   }
-  ::-moz-placeholder { /* Firefox 19+ */
+  ::-moz-placeholder {
+    /* Firefox 19+ */
     font-size: 14px;
   }
-  :-ms-input-placeholder { /* IE 10+ */
+  :-ms-input-placeholder {
+    /* IE 10+ */
     font-size: 14px;
   }
-  :-moz-placeholder { /* Firefox 18- */
+  :-moz-placeholder {
+    /* Firefox 18- */
     font-size: 14px;
   }
 }
