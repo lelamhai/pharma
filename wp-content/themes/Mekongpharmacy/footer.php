@@ -143,7 +143,7 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-<script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/log.js"></script>
+<!-- <script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/log.js"></script> -->
 <script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/quick-order.js"></script>
 
 <script>
@@ -292,7 +292,7 @@ $( ".favorite").click(function() {
 </script>
 
 <script>
-$( "#btn-submit-log").click(function() {
+$(document).on('click', "#btn-submit-log", function() {
 	$userName = $("#email-s").val();
 	$password = $("#password-s").val();
 	var data = {
@@ -328,41 +328,172 @@ $( ".shopping-cart").click(function() {
 });
 </script>
 
-
 <script>
-$( "#btn-submit-sign-up").click(function() {
-	$email = $("#email").val();
-	$password = $("#password").val();
+$(document).on('click', "#btn-submit-sign-up", function() {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regex_phone = /(0[3|5|7|8|9])+([0-9]{8})\b/g;
+
 	$role = $("input[name='role']:checked").val();
-	$nickname = $("#name-user").val();
-	$phone = $("#phonenumber").val();
-	$description = $("#address").val();
+    let email_check = $("#email").val();
+    let pass_check = $("#password").val();
+    let repass_check = $("#re-password").val();
+    let phone = $("#phonenumber").val();
+    let name_user = $("#name-user").val();
+    let address = $("#address").val();
 
-	var data = {
+    if(email_check !== "" && email_check.match(re) && pass_check !=="" && pass_check.length > 5 && pass_check.length < 16&& repass_check !== "" && pass_check === repass_check && name_user!== "" && phone !== "" && address !== "")
+    {
+		var data = {
 		'action': 'signUp_by_ajax',
-		'userName': $email,
-		'password': $password,
+		'userName': email_check,
+		'password': pass_check,
 		'role' : $role,
-		'nickname': $nickname,
-		'phonenumber': $phone,
-		'description': $description,
+		'nickname': name_user,
+		'phonenumber': phone,
+		'description': address,
 		'security': '<?php echo wp_create_nonce("signUp_policy"); ?>'
-	};
+		};
 
-	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
-		var result = response.slice(0, -1);
-		var obj = jQuery.parseJSON(result);
+		$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
+			var result = response.slice(0, -1);
+			var obj = jQuery.parseJSON(result);
 
-		if(obj.result == 1)
-		{
-			location.reload();
-		} else {
-			alert("Tài khoản chưa đúng");
-		}
-	});
+			if(obj.result == 1)
+			{
+				location.reload();
+			} else {
+				alert("Đăng ký tài khoản không đúng");
+			}
+		});
+    }  else {
+        if(email_check === "")
+        {
+          $("#email").css("border", "1px solid red");
+          $("#email").css("background-color", "rgb(255, 177, 177)");
+          setTimeout(function () {
+            $("#email").css("border", "unset");
+            $("#email").css("background-color", "unset");
+          }, 3000);
+        }
 
+        if(!email_check.match(re))
+        {
+            $("#email").css("border", "1px solid red");
+            $("#email").css("background-color", "rgb(255, 177, 177)");
+            setTimeout(function () {
+              $("#email").css("border", "unset");
+              $("#email").css("background-color", "unset");
+            }, 3000);
+        }
+
+        if(pass_check === "")
+        {
+          $("#password").css("border", "1px solid red");
+          $("#password").css("background-color", "rgb(255, 177, 177)");
+          setTimeout(function () {
+            $("#password").css("border", "unset");
+            $("#password").css("background-color", "unset");
+          }, 3000);
+        }
+
+        if(repass_check === "")
+        {
+          $("#re-password").css("border", "1px solid red");
+          $("#re-password").css("background-color", "rgb(255, 177, 177)");
+          setTimeout(function () {
+            $("#re-password").css("border", "unset");
+            $("#re-password").css("background-color", "unset");
+          }, 3000);
+        }
+
+
+        if(pass_check.length < 6 || pass_check.length > 16)
+        {
+            $("#password").css("border", "1px solid red");
+            $("#password").css("background-color", "rgb(255, 177, 177)");
+            setTimeout(function () {
+              $("#password").css("border", "unset");
+              $("#password").css("background-color", "unset");
+            }, 3000);
+        } 
+
+        if (pass_check !== repass_check)
+        {
+          $("#password").css("border", "1px solid red");
+          $("#password").css("background-color", "rgb(255, 177, 177)");
+          setTimeout(function () {
+            $("#password").css("border", "unset");
+            $("#password").css("background-color", "unset");
+          }, 3000);
+
+          $("#re-password").css("border", "1px solid red");
+          $("#re-password").css("background-color", "rgb(255, 177, 177)");
+          setTimeout(function () {
+            $("#re-password").css("border", "unset");
+            $("#re-password").css("background-color", "unset");
+          }, 3000);
+        }
+
+        if (name_user === "") {
+          $("#name-user").css("border", "1px solid red");
+          $("#name-user").css("background-color", "rgb(255, 177, 177)");
+          setTimeout(function () {
+            $("#name-user").css("border", "unset");
+            $("#name-user").css("background-color", "unset");
+          }, 3000);
+        }
+
+        if (phone === "") {
+            $("#phonenumber").css("border", "1px solid red");
+            $("#phonenumber").css("background-color", "rgb(255, 177, 177)");
+            setTimeout(function () {
+              $("#phonenumber").css("border", "unset");
+              $("#phonenumber").css("background-color", "unset");
+            }, 3000);
+        }
+
+        if(!phone.match(regex_phone)) {
+          $("#phonenumber").css("border", "1px solid red");
+          $("#phonenumber").css("background-color", "rgb(255, 177, 177)");
+          setTimeout(function () {
+            $("#phonenumber").css("border", "unset");
+            $("#phonenumber").css("background-color", "unset");
+          }, 3000);
+        } 
+
+        if (address === "") {
+          $("#address").css("border", "1px solid red");
+          $("#address").css("background-color", "rgb(255, 177, 177)");
+          setTimeout(function () {
+            $("#address").css("border", "unset");
+            $("#address").css("background-color", "unset");
+          }, 3000);
+        }
+    }
 });
+	
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
 $page = 2;

@@ -363,12 +363,13 @@
                 </div>
                 <div class="item-form">
                   <i class="fas fa-phone"></i>
-                  <input
+                  <input type="tel" id="phonenumber" name="phonenumber" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Nhập số điện thoại">
+                  <!-- <input
                     type="text"
                     name="phonenumber"
                     id="phonenumber"
                     placeholder="Nhập số điện thoại"
-                  />
+                  /> -->
                 </div>
                 <div class="item-form">
                   <i class="fas fa-map-marker-alt special-i"></i>
