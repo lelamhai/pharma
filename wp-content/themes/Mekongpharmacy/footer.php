@@ -143,12 +143,12 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-<script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/log.js"></script>
+<!-- <script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/log.js"></script> -->
 <script type="text/javascript" src="<?php echo get_bloginfo("template_directory"); ?>/assets/js/quick-order/quick-order.js"></script>
 
 <script>
 var currentdate = new Date();
-$( ".buttonMinus").click(function() {
+$(document).on('click', ".buttonMinus", function() {
     var productId = $(this).data("product");
 	var idUser = $('#userId').val();
 	var productPrice = $('#price-'+productId).val();
@@ -194,7 +194,7 @@ $( ".buttonMinus").click(function() {
 	$("#totalPriceQuickOrder").text($totalPrice);
 });
 
-$( ".buttonAdd").click(function() {
+$(document).on('click', ".buttonAdd", function() {
 	var productId = $(this).data("product");
 	var idUser = $('#userId').val();
 	console.log("====" + idUser);
@@ -245,8 +245,9 @@ $( ".buttonAdd").click(function() {
 
 	
 	$totalPrice = $totalPrice.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-	$("#totalPriceQuickOrder").text($totalPrice);
+	$("#totalPriceQuickOrder").text($totalPrice);      
 });
+
 </script>
 
 <script>
@@ -381,7 +382,23 @@ $( "#btn-submit-sign-up").click(function() {
 });
 </script>
 
+<script>
+$page = 2;
+$( "#button-quick-order").click(function() {
+	var data = {
+		'action': 'loadMore_by_ajax',
+		'page': $page,
+		'security': '<?php echo wp_create_nonce("loadMore_policy"); ?>'
+	};
 
+	$.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", data, function(response) {
+		response = response.slice(0, -1);
+		$('.DHN-list-item').append(response);
+		$page++;
+	});
+	
+});
+</script>
 
 
 </body>

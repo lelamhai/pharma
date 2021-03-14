@@ -458,16 +458,9 @@ function my_custom_menu_page(){
 		?>
 		<?php
 	}
-    ?>
-	<!-- <main>
-      <div class="container">
-       
-      </div>
-    </main> -->
-	<?php
 }
 
-// ====== Column user =======\\
+// ====== Add column user =======\\
 function new_city_methods( $citymethods ) {
     $citymethods['phone'] = 'Phone';
 	$citymethods['user'] = 'Role User';
@@ -675,4 +668,116 @@ function signUp_by_ajax_callback() {
 	}
 }
 
-?>
+
+// ==== Load more ===\\
+add_action('wp_ajax_loadMore_by_ajax', 'loadMore_by_ajax_callback');
+add_action('wp_ajax_nopriv_loadMore_by_ajax', 'loadMore_by_ajax_callback');
+function loadMore_by_ajax_callback() {
+    check_ajax_referer('loadMore_policy', 'security');
+	$page = $_POST['page'];
+	$args = array(
+		'post_type'     => 'product',
+		's'             => $_GET["search"],
+		'post_status'       => 'publish',
+		'paged'         => $page,
+		'posts_per_page'=> 10
+	); 
+	$the_query = new WP_Query( $args );
+	if ( $the_query->have_posts() ) {
+		while ( $the_query->have_posts() ) {
+			$the_query->the_post();
+			?>
+				
+
+				<div class="DHN-list-item-row">
+                                    <div class="DHN-sample-img">
+                                            <?php echo get_the_post_thumbnail( $_post->ID, 'full' );?>
+                                            <!-- <img src="<?php bloginfo('template_url'); ?>/assets/images/quick_order/panadol.jpg" alt="">    -->
+                                        </div>
+                                        <div class="DHN-information">
+                                            <div class="DHN-name">
+                                                <a title="Panadol extra gsk (h/180v)" href="#"><?php the_title()?></a>
+                                            </div>
+                                            <div class="DHN-category">
+                                                <ul>    
+                                                    <li>
+                                                        <div class="DHN-tag-ban-chay">
+                                                            <i class="fas fa-thumbs-up"></i>
+                                                            Bán chạy
+                                                        </div>                                            
+                                                    </li>
+                                                    <li>
+                                                        <div class="DHN-tag-hoa-don-nhanh" >
+                                                            <i class="fas fa-file-invoice-dollar"></i>
+                                                            Hóa đơn nhanh
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="DHN-tag-giao-nhanh">
+                                                            <i class="fas fa-shipping-fast"></i>
+                                                        Giao nhanh
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="DHN-information2">
+                                            <div class="DHN-capacity">
+                                                <small>Hộp 15 vỉ x 12 viên</small>
+                                            </div>                                
+                                        </div>
+                                        <div class="DHN-information3">
+                                            <div class="DHN-price">
+						        <div class="DHN-new-price">
+                                           	     <span class="DHN-number">
+                                               	     	<?php 
+                                              	          	$value = get_field( "_sale_price", get_the_ID() );
+                                                        	if($value == null)
+                                                        	{
+                                                            	$value = get_field( "_regular_price", get_the_ID() );
+                                                        	}
+                                                        	echo number_format($value, 0, ',', '.');
+                                                    	?>
+                                                    	<input type="hidden" id="price-<?php echo get_the_ID();?>"  value="<?php echo $value;?>">
+                                                      </span>
+                                               	      <span class="DHN-unit">đ</span>
+						            </div>
+
+						                <div class="DHN-old-price">
+                                        		<span class="DHN-number">
+                                            		      <del>234.400</del>
+                                        		</span>
+                                        		<span class="DHN-unit">
+                                            		       <del>đ</del>
+                                        		</span>
+                                    		</div>   
+
+                                            </div>
+                                            <div class="DHN-quantity">
+                                                <button class="DHN-minus buttonMinus" data-product="<?php echo get_the_ID()?>">
+                                                    <i class="fas fa-minus-circle"></i>
+                                                </button>
+
+                                                <input id="value-<?php echo get_the_ID();?>" class="DHN-number" type="text" 
+                                                value=<?php 
+                                                    $key_1_value = get_post_meta($_COOKIE["idUser"],  get_the_ID(), true );
+                                                    if ( ! empty( $key_1_value ) ) {
+                                                        echo $key_1_value;
+                                                    } else {
+                                                        echo 0;
+                                                    }
+                                                        ?>>
+                                                </input>
+
+                                                <button class="DHN-plus buttonAdd" data-product="<?php echo get_the_ID();?>">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+			<?php
+		}
+	}
+	wp_reset_postdata();
+}

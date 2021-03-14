@@ -56,9 +56,11 @@ for($i=0; $i < count($data); $i++)
 
                     <?php
                     $args = array(
-                        'post_type' => 'product',
-                        's' => $_GET["search"],
-                        'posts_per_page' => 10
+                        'post_type'     => 'product',
+                        's'             => $_GET["search"],
+                        'post_status'       => 'publish',
+                        'paged'         => 1,
+                        'posts_per_page'=> 10
                     ); 
                     $the_query = new WP_Query( $args );
                     if ( $the_query->have_posts() ) {
@@ -105,7 +107,7 @@ for($i=0; $i < count($data); $i++)
                                         </div>
                                         <div class="DHN-information3">
                                             <div class="DHN-price">
-						<div class="DHN-new-price">
+						        <div class="DHN-new-price">
                                            	     <span class="DHN-number">
                                                	     	<?php 
                                               	          	$value = get_field( "_sale_price", $post->ID );
@@ -118,7 +120,7 @@ for($i=0; $i < count($data); $i++)
                                                     	<input type="hidden" id="price-<?php echo $post->ID;?>"  value="<?php echo $value;?>">
                                                       </span>
                                                	      <span class="DHN-unit">đ</span>
-						</div>
+						            </div>
 
 						                <div class="DHN-old-price">
                                         		<span class="DHN-number">
@@ -163,6 +165,11 @@ for($i=0; $i < count($data); $i++)
                     ?>
     
                     </div>
+
+                    <div class="pagination-quick-order">
+                        <button id="button-quick-order">Xem thêm</button>
+                    </div>
+
                 </div>
                 
                 <div class="DHN-kart">
