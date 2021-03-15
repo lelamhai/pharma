@@ -728,8 +728,17 @@
         height: auto;
     }
 
+    .GH-kart div:first-child{
+        flex-direction: column;
+    }
+
+    .GH-kart .GH-info, .GH-right .GH-kart .GH-info-2 {
+        width: 100%;
+    }
+
     .GH-kart .GH-info {
-        width: 45%;
+       
+        border-right: none;
     }
 
     .GH-kart .GH-btn-check {
@@ -845,7 +854,7 @@
     .GH-kart .GH-btn-check a{
         /* height: 22%; */
         /* line-height: 1; */
-        font-size: 18px;
+        font-size: 16px;
         padding: 10px 0px;
         margin-left: 8px;
         margin-top: 0px;
@@ -936,9 +945,10 @@
     }
 
     .GH-kart .GH-btn-check a{
-        height: 30%;
+        /* height: 30%; */
+        width: 97%;
         margin-top: 21px;
-        margin-left: 17px;
+        
         margin-bottom: 10px
     }
 }
@@ -1025,9 +1035,9 @@
     }
 
     .GH-kart .GH-btn-check a{
-        height: 30%;
+        width: 95%;
         margin-top: 21px;
-        margin-left: 17px;
+        /* margin-left: 17px; */
         margin-bottom: 10px
     }
 
