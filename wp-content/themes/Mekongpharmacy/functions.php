@@ -401,7 +401,7 @@ function my_custom_menu_page(){
 		</style>
 		<div class="row-header-cart">
 			<div class="wrap-header-cart">
-				<div class="header-item column-small">Thích</div>
+				<div class="header-item">Thích</div>
 				<div class="header-item column-big">Tên sản phẩm</div>
 				<div class="header-item column-small">Số Lượng</div>
 				<div class="header-item">Ngày đặt</div>
@@ -436,9 +436,14 @@ function my_custom_menu_page(){
 								$totalPrice = $totalPrice + $itemPrice;
 								?>
 								<div class="content-item ">
-									<div class="header-item column-small">
-										<?php 
-											echo $data[$i]->ProductFavorite; 
+									<div class="header-item">
+										<?php
+											$value = "Không quan tâm"; 
+											if($data[$i]->ProductFavorite == 1)
+											{
+												$value = "Quan tâm"; 
+											}
+											echo $value; 
 										?>
 									</div>
 									<div class="header-item column-big">
