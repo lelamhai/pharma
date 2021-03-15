@@ -692,12 +692,13 @@
         text-align: center;
     }
 
-    .DHN-information3 .DHN-price, .DHN-information3 .DHN-quantity{
+    /* .DHN-information3 .DHN-price, .DHN-information3 .DHN-quantity{
         padding-left: 45px;
-    }
+    } */
 }
             /* iphone 5 */
 
+            
 .not-found-quick-order {
     text-align: center;
     font-size: 26px;
@@ -738,3 +739,4 @@
         width: 95%;
     }
 }
+
