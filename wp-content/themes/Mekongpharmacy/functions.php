@@ -452,7 +452,7 @@ function my_custom_menu_page(){
 										?>
 									</div>
 									<div class="header-item">
-										<?php echo $data[$i]->ProductDate; ?>
+										<?php echo date("d/m/Y", strtotime($data[$i]->ProductDate));?>
 									</div>
 									<div class="header-item column-small">									
 										<?php echo number_format($data[$i]->ProductPrice, 0, ',', '.');?> đ
@@ -538,7 +538,7 @@ function load_posts_by_ajax_callback() {
 	$productId = $_POST['productId'];
 	$productCount = $_POST['productCount'];
 	$productPrice = $_POST['productPrice'];
-	$productDate = $_POST['productDate'];
+	// $productDate =  current_time('mysql', 1);
 
 	// check user id
 	$data = $wpdb->get_results( 'SELECT UserId, ProductId FROM '.$table_name.' WHERE UserId ='.$userId .' AND ProductId = '.$productId);
@@ -547,7 +547,7 @@ function load_posts_by_ajax_callback() {
 		$wpdb->insert( $table_name, array(
 		'UserId' => $userId,
 		'ProductId' => $productId,
-		'ProductDate' => $productDate,
+		'ProductDate' => current_time('mysql', 1),
 		'ProductPrice' => $productPrice,
 		'ProductCount' => $productCount
 		));
@@ -557,7 +557,8 @@ function load_posts_by_ajax_callback() {
 		$wpdb->update(
 		$table_name,
 			array( 
-				'ProductCount' => $productCount
+				'ProductCount' 	=> $productCount,
+				'ProductDate'	=> current_time('mysql', 1)
 			),
 			array(
 				'ProductId' => $productId 
