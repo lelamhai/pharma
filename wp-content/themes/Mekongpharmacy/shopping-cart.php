@@ -5,7 +5,7 @@
 ?>
 
 <?php get_header(); ?>
-<div class="DHN-container">
+<div class="GH-container">
             <div class="GH-products-and-kart">
                 <div class="GH-tittle">
                     <h1>Giỏ hàng</h1>
