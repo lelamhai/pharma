@@ -397,6 +397,12 @@ function my_custom_menu_page(){
 				font-size: 17px;
 			}
 
+			.not-data {
+				text-align: center;
+				font-size: 25px;
+				font-weight: 600;
+			}
+
 
 		</style>
 		<div class="row-header-cart">
@@ -481,6 +487,8 @@ function my_custom_menu_page(){
 
 			
 			<?php
+		} else {
+			echo "<div class='not-data'>Chưa có dữ liệu</div>";
 		}
 		?>
 		<?php
